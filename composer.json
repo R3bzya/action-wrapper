@@ -1,0 +1,38 @@
+{
+    "name": "r3bzya/action-wrapper",
+    "description": "Each actions are decorated easily",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^v10.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.12",
+        "phpunit/phpunit": "^10.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "R3bzya\\ActionWrapper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "R3bzya\\ActionWrapper\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Aleksey R3bzya Yakushev",
+            "email": "r3bzya@gmail.com",
+            "homepage": "https://github.com/R3bzya",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable"
+}
