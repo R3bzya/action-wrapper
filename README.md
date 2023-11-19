@@ -1,6 +1,18 @@
 # Action Wrapper
 
-Add a new behavior to your actions. 
+Add a new behavior to your actions.
+
+## Available classes
+
+When you need to wrap some actions and you don't need create a new action class then you can use the FluentAction class.
+
+> ***Note:*** The FluentAction class has the `Traits\Simples\HasActionWrapper` trait.
+>
+>```
+>$action = new \R3bzya\ActionWrapper\Actions\FluentAction;
+>
+>$action->execute(fn(): bool => true);
+>```
 
 ## Available methods
 
