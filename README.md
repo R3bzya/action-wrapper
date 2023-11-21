@@ -139,6 +139,16 @@ $this->tap(function (mixed $result): void {
 });
 ```
 
+#### *tapWhen(mixed $condition, callable $decorator): ActionWrapper|static*
+
+The `tapWhen` method calls the given Closure then return the action result when the condition is truthy.
+
+```
+$this->tapWhen(true, function (mixed $result): void {
+    //
+});
+```
+
 #### *throwIf(mixed $condition, Throwable $throwable = new RuntimeException, bool $strict = false): ActionWrapper|static*
 
 The `throwIf` method will throw the given exception when the action result will be equal to the given condition.

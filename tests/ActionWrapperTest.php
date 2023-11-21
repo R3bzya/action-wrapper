@@ -188,6 +188,35 @@ class ActionWrapperTest extends TestCase
         $this->assertEquals(1, $result);
     }
 
+    #[DataProvider('tapWhenData')]
+    public function testTapWhen(mixed $condition, int $expectedResult): void
+    {
+        $tapableValue = 2;
+
+        $result = (new FluentAction)
+            ->tapWhen($condition, function (int $value) use (&$tapableValue) {
+                return $tapableValue += $value;
+            })
+            ->execute(1);
+
+        $this->assertEquals(1, $result);
+        $this->assertEquals($expectedResult, $tapableValue);
+    }
+
+    public static function tapWhenData(): array
+    {
+        return [
+            [
+                true,
+                3
+            ],
+            [
+                false,
+                2
+            ]
+        ];
+    }
+
     #[DataProvider('whenData')]
     public function testWhen(mixed $condition, callable $callable, mixed $expected): void
     {

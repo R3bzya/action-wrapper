@@ -16,4 +16,16 @@ trait Tappable
     {
         return $this->after(fn(mixed $result) => tap($result, $decorator));
     }
+
+    /**
+     * When the condition is truthy call the given Closure then return the action result.
+     *
+     * @param mixed $condition
+     * @param callable $callable
+     * @return ActionWrapper|$this
+     */
+    public function tapWhen(mixed $condition, callable $callable): ActionWrapper|static
+    {
+        return $this->when($condition, fn(mixed $result) => tap($result, $callable));
+    }
 }
