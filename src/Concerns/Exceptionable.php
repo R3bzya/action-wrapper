@@ -16,7 +16,7 @@ trait Exceptionable
      *
      * @param mixed $condition
      * @param Throwable $throwable
-     * @return ActionWrapper|$this
+     * @return ActionWrapper|static
      */
     public function throwWhen(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static
     {
@@ -28,7 +28,7 @@ trait Exceptionable
      *
      * @param mixed $condition
      * @param Throwable $throwable
-     * @return ActionWrapper|$this
+     * @return ActionWrapper|static
      */
     public function throwUnless(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static
     {
@@ -41,12 +41,12 @@ trait Exceptionable
      * @param mixed $condition
      * @param Throwable $throwable
      * @param bool $strict
-     * @return ActionWrapper|$this
+     * @return ActionWrapper|static
      */
     public function throwIf(
         mixed $condition,
         Throwable $throwable = new RuntimeException,
-        bool $strict = false
+        bool $strict = false,
     ): ActionWrapper|static
     {
         return $this->throwWhen(function (mixed $result) use ($condition, $strict) {
@@ -61,12 +61,12 @@ trait Exceptionable
      * @param mixed $condition
      * @param Throwable $throwable
      * @param bool $strict
-     * @return ActionWrapper|$this
+     * @return ActionWrapper|static
      */
     public function throwIfNot(
         mixed $condition,
         Throwable $throwable = new RuntimeException,
-        bool $strict = false
+        bool $strict = false,
     ): ActionWrapper|static
     {
         return $this->throwUnless(function (mixed $result) use ($condition, $strict) {
@@ -80,7 +80,7 @@ trait Exceptionable
      *
      * @param Throwable $throwable
      * @param bool $strict
-     * @return ActionWrapper|$this
+     * @return ActionWrapper|static
      */
     public function throwIfNotDone(Throwable $throwable = new NotDoneException, bool $strict = true): ActionWrapper|static
     {

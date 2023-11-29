@@ -22,7 +22,7 @@ trait Tappable
      *
      * @param mixed $condition
      * @param callable $callable
-     * @return ActionWrapper|$this
+     * @return ActionWrapper|static
      */
     public function tapWhen(mixed $condition, callable $callable): ActionWrapper|static
     {

@@ -129,32 +129,32 @@ class ActionWrapperTest extends TestCase
             [
                 fn(...$arguments) => [$arguments[0] + 1],
                 [1],
-                2
+                2,
             ],
             [
                 fn(...$arguments) => ['value' => $arguments['value'] + 1],
                 ['value' => 1],
-                2
+                2,
             ],
             [
                 fn(int $value) => [$value + 1],
                 [1],
-                2
+                2,
             ],
             [
                 fn(int $value) => ['value' => $value + 1],
                 [1],
-                2
+                2,
             ],
             [
                 fn(int $value, int $foo = null) => ['value' => $value + 1],
                 ['foo' => 2, 'value' => 1],
-                2
+                2,
             ],
             [
                 fn() => false,
                 [true],
-                false
+                false,
             ],
         ];
     }
@@ -208,12 +208,12 @@ class ActionWrapperTest extends TestCase
         return [
             [
                 true,
-                3
+                3,
             ],
             [
                 false,
-                2
-            ]
+                2,
+            ],
         ];
     }
 
@@ -233,7 +233,7 @@ class ActionWrapperTest extends TestCase
             [
                 true,
                 fn() => 'new_string',
-                'new_string'
+                'new_string',
             ],
             [
                 fn(string $result) => $result == 'unexpected',
@@ -248,7 +248,7 @@ class ActionWrapperTest extends TestCase
             [
                 false,
                 fn() => 'new_string',
-                'unexpected'
+                'unexpected',
             ],
             [
                 fn(string $result) => $result !== 'unexpected',
@@ -279,7 +279,7 @@ class ActionWrapperTest extends TestCase
             [
                 false,
                 fn() => 'new_string',
-                'new_string'
+                'new_string',
             ],
             [
                 fn(string $result) => $result != 'expected',
@@ -294,7 +294,7 @@ class ActionWrapperTest extends TestCase
             [
                 true,
                 fn() => 'new_string',
-                'expected'
+                'expected',
             ],
             [
                 fn(string $result) => $result !== 'unexpected',
