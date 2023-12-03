@@ -1,10 +1,10 @@
 # Action Wrapper
 
-Add a new behavior to your actions.
+ActionWrapper is a simple yet flexible action decorator.
 
 ## Available classes
 
-When you need to wrap some actions and you don't need create a new action class then you can use the FluentAction class.
+When you need to wrap some actions and you don't have to create a new action class use the FluentAction class.
 
 > ***Note:*** The FluentAction class has the `Traits\Simples\HasActionWrapper` trait.
 >
@@ -19,7 +19,7 @@ When you need to wrap some actions and you don't need create a new action class 
 ### Base methods
 
 > ***Note:*** These methods available in `Traits\Simples\HasActionWrapper`.
-> 
+>
 >```
 >class Example
 >{
@@ -31,7 +31,8 @@ When you need to wrap some actions and you don't need create a new action class 
 
 #### *after(callable $decorator): ActionWrapper|static*
 
-The `after` method adds a callable function to an ActionWrapper which will be called after executing any of the `decoratedMethods` methods.
+The `after` method adds a callable function to an ActionWrapper which will be called after executing any of the `decoratedMethods`
+methods.
 
 ```
 $this->after(fn(mixed $result): mixed => $result);
@@ -39,7 +40,8 @@ $this->after(fn(mixed $result): mixed => $result);
 
 #### *before(callable $decorator): ActionWrapper|static*
 
-The `before` method adds a callable function to an ActionWrapper which will be called before executing any of the `decoratedMethods` methods.
+The `before` method adds a callable function to an ActionWrapper which will be called before executing any of
+the `decoratedMethods` methods.
 When the given callable function returns false, the action will be interrupted.
 To change the input arguments the given callable should return an array otherwise the `before` method will work like a tap.
 
@@ -123,7 +125,8 @@ $this->through(fn(array $arguments, \Closure $next): \Closure => $next($attribut
 
 #### *refreshModel(): ActionWrapper|static*
 
-The `refreshModel` method reloads the model instance with fresh attributes from the database. [see](https://laravel.com/docs/10.x/eloquent#refreshing-models)
+The `refreshModel` method reloads the model instance with fresh attributes from the
+database. [see](https://laravel.com/docs/10.x/eloquent#refreshing-models)
 
 ```
 $this->refreshModel();
@@ -230,7 +233,8 @@ $this->unless(false, fn(mixed $result): mixed => $result);
 
 #### *unsetModelRelations(): ActionWrapper|static*
 
-The `unsetModelRelations` method unsets all the loaded relations from the model. [see](https://laravel.com/api/10.x/Illuminate/Database/Eloquent/Concerns/HasRelationships.html#method_unsetRelations)
+The `unsetModelRelations` method unsets all the loaded relations from the
+model. [see](https://laravel.com/api/10.x/Illuminate/Database/Eloquent/Concerns/HasRelationships.html#method_unsetRelations)
 
 ```
 $this->unsetModelRelations();

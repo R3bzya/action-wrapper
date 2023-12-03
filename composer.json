@@ -1,6 +1,6 @@
 {
     "name": "r3bzya/action-wrapper",
-    "description": "Each actions are decorated easily",
+    "description": "ActionWrapper is a simple yet flexible action decorator",
     "type": "library",
     "license": "MIT",
     "require": {
