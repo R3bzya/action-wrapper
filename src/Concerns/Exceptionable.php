@@ -5,7 +5,6 @@ namespace R3bzya\ActionWrapper\Concerns;
 use Closure;
 use R3bzya\ActionWrapper\ActionWrapper;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;
-use R3bzya\ActionWrapper\Support\Operators\Equality\IsEqual;
 use RuntimeException;
 use Throwable;
 
@@ -50,8 +49,9 @@ trait Exceptionable
     ): ActionWrapper|static
     {
         return $this->throwWhen(function (mixed $result) use ($condition, $strict) {
-            return (new IsEqual($result, $strict))
-                ->evaluate($condition instanceof Closure ? $condition($result) : $condition);
+            $condition = $condition instanceof Closure ? $condition($result) : $condition;
+
+            return $strict ? $result === $condition : $result == $condition;
         }, $throwable);
     }
 
@@ -70,8 +70,9 @@ trait Exceptionable
     ): ActionWrapper|static
     {
         return $this->throwUnless(function (mixed $result) use ($condition, $strict) {
-            return (new IsEqual($result, $strict))
-                ->evaluate($condition instanceof Closure ? $condition($result) : $condition);
+            $condition = $condition instanceof Closure ? $condition($result) : $condition;
+
+            return $strict ? $result === $condition : $result == $condition;
         }, $throwable);
     }
 
