@@ -2,9 +2,17 @@
 
 ActionWrapper is a simple yet flexible action decorator.
 
+## Installation
+
+Via Composer:
+
+```shell
+composer require r3bzya/action-wrapper
+```
+
 ## Available classes
 
-When you need to wrap some actions and you don't have to create a new action class use the FluentAction class.
+When you need to wrap some actions, and you don't have to create a new action class use the FluentAction class.
 
 > ***Note:*** The FluentAction class has the `Traits\Simples\HasActionWrapper` trait.
 >
