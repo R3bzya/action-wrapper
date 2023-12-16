@@ -35,7 +35,7 @@ trait Exceptionable
     }
 
     /**
-     * Throw an exception when result equals to condition.
+     * Throw an exception when the result equals to condition.
      *
      * @param mixed $condition
      * @param Throwable $throwable
@@ -56,7 +56,7 @@ trait Exceptionable
     }
 
     /**
-     * Throw an exception when result not equals to condition.
+     * Throw an exception when the result not equals to condition.
      *
      * @param mixed $condition
      * @param Throwable $throwable

@@ -18,7 +18,7 @@ trait Tappable
     }
 
     /**
-     * When the condition is truthy call the given Closure then return the action result.
+     * When the condition is truthy call the given Closure, then return the action result.
      *
      * @param mixed $condition
      * @param callable $callable

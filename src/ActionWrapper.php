@@ -33,7 +33,7 @@ class ActionWrapper
      * Add the pipe.
      *
      * @param callable $pipe
-     * @return $this
+     * @return static
      */
     public function through(callable $pipe): static
     {
@@ -45,7 +45,7 @@ class ActionWrapper
     /**
      * Remove all pipes.
      *
-     * @return $this
+     * @return static
      */
     public function forgetPipes(): static
     {

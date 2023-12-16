@@ -12,7 +12,7 @@ composer require r3bzya/action-wrapper
 
 ## Available classes
 
-When you need to wrap some actions, and you don't have to create a new action class use the FluentAction class.
+When you need to wrap some actions, and you don't have to create a new action class, use the FluentAction class.
 
 > ***Note:*** The FluentAction class has the `Traits\Simples\HasActionWrapper` trait.
 >
@@ -51,7 +51,7 @@ $this->after(fn(mixed $result): mixed => $result);
 The `before` method adds a callable function to an ActionWrapper which will be called before executing any of
 the `decoratedMethods` methods.
 When the given callable function returns false, the action will be interrupted.
-To change the input arguments the given callable should return an array otherwise the `before` method will work like a tap.
+To change the input arguments, the given callable should return an array otherwise the `before` method will work like a tap.
 
 ```
 $this->before(fn(mixed $value): array => [$value]);
@@ -162,7 +162,7 @@ $this->tapWhen(true, function (mixed $result): void {
 
 #### *throwIf(mixed $condition, Throwable $throwable = new RuntimeException, bool $strict = false): ActionWrapper|static*
 
-The `throwIf` method will throw the given exception when the action result will be equal to the given condition.
+The `throwIf` method will throw the given exception when the action result is equal to the given condition.
 
 ```
 $this->throwIf(true);
@@ -174,7 +174,7 @@ $this->throwIf(fn(mixed $result): mixed => true);
 
 #### *throwIfNot(mixed $condition, Throwable $throwable = new RuntimeException, bool $strict = false): ActionWrapper|static*
 
-The `throwIfNot` method will throw the given exception when the action result will be not equal to the given condition.
+The `throwIfNot` method will throw the given exception when the action result is not equal to the given condition.
 
 ```
 $this->throwIfNot(true);
@@ -186,7 +186,7 @@ $this->throwIfNot(fn(mixed $result): mixed => true);
 
 #### *throwIfNotDone(Throwable $throwable = new NotDoneException, bool $strict = true): ActionWrapper|static*
 
-The `throwIfNotDone` method will throw the given exception when the action result will be false.
+The `throwIfNotDone` method will throw the given exception when the action result is false.
 
 ```
 $this->throwIfNotDone();
