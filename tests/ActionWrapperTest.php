@@ -13,9 +13,7 @@ class ActionWrapperTest extends TestCase
     public function testThrough(): void
     {
         $result = wrapper()
-            ->through(function (array $arguments, Closure $next) {
-                return $next($arguments) + 1;
-            })
+            ->through(fn(array $arguments, Closure $next) => $next($arguments) + 1)
             ->execute(1);
 
         $this->assertEquals(2, $result);
@@ -24,21 +22,11 @@ class ActionWrapperTest extends TestCase
     public function testMultiplyThrough(): void
     {
         $result = wrapper()
-            ->through(function (array $arguments, Closure $next) {
-                return $next($arguments) - 1;
-            })
-            ->through(function (array $arguments, Closure $next) {
-                return 2 * $next($arguments);
-            })
-            ->after(function (int $value) {
-                return $value + 3;
-            })
-            ->before(function (int $value) {
-                return [$value + 2];
-            })
-            ->tap(function (int $value) {
-                return $value + 1; // no effect
-            })
+            ->through(fn(array $arguments, Closure $next) => $next($arguments) - 1)
+            ->through(fn(array $arguments, Closure $next) => 2 * $next($arguments))
+            ->after(fn(int $value) => $value + 3)
+            ->before(fn(int $value) => [$value + 2])
+            ->tap(fn(int $value) => $value + 1) // no effect
             ->execute(1);
 
         $this->assertEquals(11, $result);
@@ -65,7 +53,7 @@ class ActionWrapperTest extends TestCase
         $this->expectException(RuntimeException::class);
 
         wrapper()
-            ->throwWhen(fn(bool $result) => $result == false)
+            ->throwWhen(true)
             ->execute(false);
     }
 
@@ -74,18 +62,26 @@ class ActionWrapperTest extends TestCase
         $this->expectException(RuntimeException::class);
 
         wrapper()
-            ->throwUnless(fn(bool $result) => $result == true)
+            ->throwUnless(false)
             ->execute(false);
     }
 
-    public function throwIf(): void
+    public function testThrowIf(): void
     {
-        $this->markTestSkipped();
+        $this->expectException(RuntimeException::class);
+
+        wrapper()
+            ->throwIf(false)
+            ->execute(false);
     }
 
-    public function throwIfNot(): void
+    public function testThrowIfNot(): void
     {
-        $this->markTestSkipped();
+        $this->expectException(RuntimeException::class);
+
+        wrapper()
+            ->throwIfNot(true)
+            ->execute(false);
     }
 
     #[DataProvider('throwIfNotDoneData')]
@@ -161,9 +157,7 @@ class ActionWrapperTest extends TestCase
     public function testAfter(): void
     {
         $result = wrapper()
-            ->after(function (int $value) {
-                return $value + 1;
-            })
+            ->after(fn(int $value) => $value + 1)
             ->execute(1);
 
         $this->assertEquals(2, $result);
@@ -179,27 +173,21 @@ class ActionWrapperTest extends TestCase
     public function testTap(): void
     {
         $result = wrapper()
-            ->tap(function (int $value) {
-                return $value + 1;
-            })
+            ->tap(fn(int $value) => $value + 1)
             ->execute(1);
 
         $this->assertEquals(1, $result);
     }
 
     #[DataProvider('tapWhenData')]
-    public function testTapWhen(mixed $condition, int $expectedResult): void
+    public function testTapWhen(mixed $condition, int $assertionsCount): void
     {
-        $tapableValue = 2;
-
         $result = wrapper()
-            ->tapWhen($condition, function (int $value) use (&$tapableValue) {
-                return $tapableValue += $value;
-            })
-            ->execute(1);
+            ->tapWhen($condition, fn(int $value) => $this->addToAssertionCount(1))
+            ->execute(true);
 
-        $this->assertEquals(1, $result);
-        $this->assertEquals($expectedResult, $tapableValue);
+        $this->assertTrue($result);
+        $this->assertEquals($assertionsCount, $this->numberOfAssertionsPerformed());
     }
 
     public static function tapWhenData(): array
@@ -207,11 +195,11 @@ class ActionWrapperTest extends TestCase
         return [
             [
                 true,
-                3,
+                1,
             ],
             [
                 false,
-                2,
+                0,
             ],
         ];
     }
