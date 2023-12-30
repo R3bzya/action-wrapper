@@ -1,11 +1,12 @@
 {
     "name": "r3bzya/action-wrapper",
     "description": "ActionWrapper is a simple yet flexible action decorator",
+    "homepage": "https://github.com/R3bzya/action-wrapper",
     "type": "library",
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^v10.0"
+        "laravel/framework": "^10.0"
     },
     "require-dev": {
         "orchestra/testbench": "^8.12",
@@ -34,5 +35,6 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
