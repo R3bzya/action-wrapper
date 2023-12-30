@@ -12,14 +12,20 @@ composer require r3bzya/action-wrapper
 
 ## Available classes
 
-When you need to wrap some actions, and you don't have to create a new action class, use the FluentAction class.
+When you need to wrap some actions, and you don't have to create a new action class
+use the `FluentAction` class.
+You can make a new instance with the `wrapper` function.
 
-> ***Note:*** The FluentAction class has the `Traits\Simples\HasActionWrapper` trait.
+> ***Note:*** The FluentAction class has [extended methods](#extended-methods).
 >
 >```
->$action = new \R3bzya\ActionWrapper\Actions\FluentAction;
+>$action = new \R3bzya\ActionWrapper\Support\FluentAction;
 >
 >$action->execute(fn(): bool => true);
+>```
+>
+>```
+>wrapper()->execute(true);
 >```
 
 ## Available methods

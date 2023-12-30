@@ -13,6 +13,9 @@
         "phpunit/phpunit": "^10.3"
     },
     "autoload": {
+        "files": [
+            "functions.php"
+        ],
         "psr-4": {
             "R3bzya\\ActionWrapper\\": "src/"
         }

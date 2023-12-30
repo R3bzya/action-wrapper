@@ -1,6 +1,6 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Actions;
+namespace R3bzya\ActionWrapper\Support;
 
 use Closure;
 use R3bzya\ActionWrapper\Traits\HasActionWrapper;

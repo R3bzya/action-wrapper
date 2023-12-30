@@ -5,7 +5,6 @@ namespace R3bzya\ActionWrapper\Tests;
 use Closure;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use R3bzya\ActionWrapper\Actions\FluentAction;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;
 use RuntimeException;
 
@@ -13,7 +12,7 @@ class ActionWrapperTest extends TestCase
 {
     public function testThrough(): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->through(function (array $arguments, Closure $next) {
                 return $next($arguments) + 1;
             })
@@ -24,7 +23,7 @@ class ActionWrapperTest extends TestCase
 
     public function testMultiplyThrough(): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->through(function (array $arguments, Closure $next) {
                 return $next($arguments) - 1;
             })
@@ -47,7 +46,7 @@ class ActionWrapperTest extends TestCase
 
     public function testInvokableDecorator(): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->through(new class(1) {
                 public function __construct(private readonly int $value) {}
 
@@ -65,7 +64,7 @@ class ActionWrapperTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        (new FluentAction)
+        wrapper()
             ->throwWhen(fn(bool $result) => $result == false)
             ->execute(false);
     }
@@ -74,7 +73,7 @@ class ActionWrapperTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        (new FluentAction)
+        wrapper()
             ->throwUnless(fn(bool $result) => $result == true)
             ->execute(false);
     }
@@ -94,7 +93,7 @@ class ActionWrapperTest extends TestCase
     {
         $this->expectException(NotDoneException::class);
 
-        (new FluentAction)
+        wrapper()
             ->throwIfNotDone(new NotDoneException, $strict)
             ->execute($value);
     }
@@ -116,7 +115,7 @@ class ActionWrapperTest extends TestCase
     #[DataProvider('beforeData')]
     public function testBefore(callable $decorator, array $value, mixed $expected): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->before($decorator)
             ->execute(...$value);
 
@@ -161,7 +160,7 @@ class ActionWrapperTest extends TestCase
 
     public function testAfter(): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->after(function (int $value) {
                 return $value + 1;
             })
@@ -172,14 +171,14 @@ class ActionWrapperTest extends TestCase
 
     public function testFluentAction(): void
     {
-        $this->assertTrue((new FluentAction)->execute(fn() => true));
-        $this->assertFalse((new FluentAction)->execute(false));
-        $this->assertTrue((new FluentAction)->execute(fn(bool $value) => $value, true));
+        $this->assertTrue(wrapper()->execute(fn() => true));
+        $this->assertTrue(wrapper()->execute(true));
+        $this->assertTrue(wrapper()->execute(fn(bool $value) => $value, true));
     }
 
     public function testTap(): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->tap(function (int $value) {
                 return $value + 1;
             })
@@ -193,7 +192,7 @@ class ActionWrapperTest extends TestCase
     {
         $tapableValue = 2;
 
-        $result = (new FluentAction)
+        $result = wrapper()
             ->tapWhen($condition, function (int $value) use (&$tapableValue) {
                 return $tapableValue += $value;
             })
@@ -220,7 +219,7 @@ class ActionWrapperTest extends TestCase
     #[DataProvider('whenData')]
     public function testWhen(mixed $condition, callable $callable, mixed $expected): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->when($condition, $callable)
             ->execute('unexpected');
 
@@ -266,7 +265,7 @@ class ActionWrapperTest extends TestCase
     #[DataProvider('unlessData')]
     public function testUnless(mixed $condition, callable $callable, mixed $expected): void
     {
-        $result = (new FluentAction)
+        $result = wrapper()
             ->unless($condition, $callable)
             ->execute('expected');
 
