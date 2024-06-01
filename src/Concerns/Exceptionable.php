@@ -11,6 +11,43 @@ use Throwable;
 trait Exceptionable
 {
     /**
+     * Defines how to respond to a thrown exception.
+     *
+     * @param mixed $value
+     * @return ActionWrapper|static
+     */
+    public function try(mixed $value): ActionWrapper|static
+    {
+        return $this->through(function (array $arguments, Closure $next) use ($value) {
+            try {
+                return $next($arguments);
+            } catch (Throwable $e) {
+                return value($value, $e);
+            }
+        });
+    }
+
+    /**
+     * Returns false when an exception thrown.
+     *
+     * @return ActionWrapper|static
+     */
+    public function safe(): ActionWrapper|static
+    {
+        return $this->try(false);
+    }
+
+    /**
+     * Returns an exception to respond without throwing an exception.
+     *
+     * @return ActionWrapper|static
+     */
+    public function catch(): ActionWrapper|static
+    {
+        return $this->try(fn(Throwable $e) => $e);
+    }
+
+    /**
      * Throw an exception when condition is truthy.
      *
      * @param mixed $condition

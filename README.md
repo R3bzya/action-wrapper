@@ -137,6 +137,14 @@ $this->through(fn(array $arguments, \Closure $next): \Closure => $next($attribut
 >}
 >```
 
+#### *catch(): ActionWrapper|static*
+
+The `catch` method returns an exception to respond without throwing an exception.
+
+```
+$this->catch();
+```
+
 #### *refreshModel(): ActionWrapper|static*
 
 The `refreshModel` method reloads the model instance with fresh attributes from the
@@ -144,6 +152,14 @@ database. [see](https://laravel.com/docs/10.x/eloquent#refreshing-models)
 
 ```
 $this->refreshModel();
+```
+
+#### *safe(): ActionWrapper|static*
+
+The `safe` method returns false when an exception thrown.
+
+```
+$this->safe();
 ```
 
 #### *tap(callable $decorator): ActionWrapper|static*
@@ -206,6 +222,16 @@ else the transaction will be rolled back. [see](https://laravel.com/docs/10.x/da
 
 ```
 $this->transaction();
+```
+
+#### *try(mixed $value): ActionWrapper|static*
+
+The `try` method defines how to respond to a thrown exception.
+
+```
+$this->try(false);
+$this->try(fn() => false);
+$this->try(fn(Throwable $e) => $e);
 ```
 
 #### *unless(mixed $condition, callable $callable): ActionWrapper|static*

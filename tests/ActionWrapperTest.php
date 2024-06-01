@@ -262,4 +262,48 @@ class ActionWrapperTest extends TestCase
             ],
         ];
     }
+
+    public function testTry(): void
+    {
+        $this->assertFalse(
+            wrapper()
+                ->try(false)
+                ->execute(fn() => throw new RuntimeException)
+        );
+
+        $this->assertFalse(
+            wrapper()
+                ->try(fn() => false)
+                ->execute(fn() => throw new RuntimeException)
+        );
+
+        $this->assertFalse(
+            wrapper()
+                ->try(function (Throwable $e) {
+                    $this->assertInstanceOf(RuntimeException::class, $e);
+
+                    return false;
+                })
+                ->execute(fn() => throw new RuntimeException)
+        );
+    }
+
+    public function testCatch(): void
+    {
+        $this->assertInstanceOf(
+            RuntimeException::class,
+            wrapper()
+                ->catch()
+                ->execute(fn() => throw new RuntimeException)
+        );
+    }
+
+    public function testSafe(): void
+    {
+        $this->assertFalse(
+            wrapper()
+                ->safe()
+                ->execute(fn() => throw new RuntimeException)
+        );
+    }
 }
