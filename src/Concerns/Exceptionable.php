@@ -35,56 +35,13 @@ trait Exceptionable
     }
 
     /**
-     * Throw an exception when the result equals to condition.
-     *
-     * @param mixed $condition
-     * @param Throwable $throwable
-     * @param bool $strict
-     * @return ActionWrapper|static
-     */
-    public function throwIf(
-        mixed $condition,
-        Throwable $throwable = new RuntimeException,
-        bool $strict = false,
-    ): ActionWrapper|static
-    {
-        return $this->throwWhen(function (mixed $result) use ($condition, $strict) {
-            $condition = $condition instanceof Closure ? $condition($result) : $condition;
-
-            return $strict ? $result === $condition : $result == $condition;
-        }, $throwable);
-    }
-
-    /**
-     * Throw an exception when the result not equals to condition.
-     *
-     * @param mixed $condition
-     * @param Throwable $throwable
-     * @param bool $strict
-     * @return ActionWrapper|static
-     */
-    public function throwIfNot(
-        mixed $condition,
-        Throwable $throwable = new RuntimeException,
-        bool $strict = false,
-    ): ActionWrapper|static
-    {
-        return $this->throwUnless(function (mixed $result) use ($condition, $strict) {
-            $condition = $condition instanceof Closure ? $condition($result) : $condition;
-
-            return $strict ? $result === $condition : $result == $condition;
-        }, $throwable);
-    }
-
-    /**
      * Throw an exception when an action result is false.
      *
      * @param Throwable $throwable
-     * @param bool $strict
      * @return ActionWrapper|static
      */
-    public function throwIfNotDone(Throwable $throwable = new NotDoneException, bool $strict = true): ActionWrapper|static
+    public function throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static
     {
-        return $this->throwIf(false, $throwable, $strict);
+        return $this->throwWhen(fn(mixed $result) => $result === false, $throwable);
     }
 }

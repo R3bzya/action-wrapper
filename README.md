@@ -166,31 +166,7 @@ $this->tapWhen(true, function (mixed $result): void {
 });
 ```
 
-#### *throwIf(mixed $condition, Throwable $throwable = new RuntimeException, bool $strict = false): ActionWrapper|static*
-
-The `throwIf` method will throw the given exception when the action result is equal to the given condition.
-
-```
-$this->throwIf(true);
-```
-
-```
-$this->throwIf(fn(mixed $result): mixed => true);
-```
-
-#### *throwIfNot(mixed $condition, Throwable $throwable = new RuntimeException, bool $strict = false): ActionWrapper|static*
-
-The `throwIfNot` method will throw the given exception when the action result is not equal to the given condition.
-
-```
-$this->throwIfNot(true);
-```
-
-```
-$this->throwIfNot(fn(mixed $result): mixed => true);
-```
-
-#### *throwIfNotDone(Throwable $throwable = new NotDoneException, bool $strict = true): ActionWrapper|static*
+#### *throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static*
 
 The `throwIfNotDone` method will throw the given exception when the action result is false.
 

@@ -66,46 +66,13 @@ class ActionWrapperTest extends TestCase
             ->execute(false);
     }
 
-    public function testThrowIf(): void
-    {
-        $this->expectException(RuntimeException::class);
-
-        wrapper()
-            ->throwIf(false)
-            ->execute(false);
-    }
-
-    public function testThrowIfNot(): void
-    {
-        $this->expectException(RuntimeException::class);
-
-        wrapper()
-            ->throwIfNot(true)
-            ->execute(false);
-    }
-
-    #[DataProvider('throwIfNotDoneData')]
-    public function testThrowIfNotDone(mixed $value, bool $strict): void
+    public function testThrowIfNotDone(): void
     {
         $this->expectException(NotDoneException::class);
 
         wrapper()
-            ->throwIfNotDone(new NotDoneException, $strict)
-            ->execute($value);
-    }
-
-    public static function throwIfNotDoneData(): array
-    {
-        return [
-            [
-                false,
-                true,
-            ],
-            [
-                [],
-                false,
-            ],
-        ];
+            ->throwIfNotDone(new NotDoneException)
+            ->execute(false);
     }
 
     #[DataProvider('beforeData')]
