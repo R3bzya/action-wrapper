@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;
 use RuntimeException;
+use Throwable;
 
 class ActionWrapperTest extends TestCase
 {
@@ -35,8 +36,8 @@ class ActionWrapperTest extends TestCase
     public function testInvokableDecorator(): void
     {
         $result = wrapper()
-            ->through(new class(1) {
-                public function __construct(private readonly int $value) {}
+            ->through(new readonly class(1) {
+                public function __construct(private int $value) {}
 
                 public function __invoke(array $arguments, Closure $next): int
                 {

@@ -85,7 +85,7 @@ The `decoratedMethods` method defines function names to be decorated. The defaul
 $this->decoratedMethods();
 ```
 
-#### *forgetActionWrapper(): static*
+#### *forgetActionWrapper(): ActionWrapper|static*
 
 The `forgetActionWrapper` method unsets the action wrapper from the action.
 
@@ -101,7 +101,7 @@ The `getActionWrapper` method returns a cached ActionsWrapper or makes and cache
 $this->getActionWrapper();
 ```
 
-#### *makeActionWrapper(): ActionWrapper*
+#### *makeActionWrapper(): ActionWrapper|static*
 
 The `makeActionWrapper` method creates a new ActionWrapper instance.
 
@@ -109,7 +109,7 @@ The `makeActionWrapper` method creates a new ActionWrapper instance.
 $this->makeActionWrapper();
 ```
 
-#### *resetActionWrapper(): static*
+#### *resetActionWrapper(): ActionWrapper|static*
 
 The `resetActionWrapper` method removes all pipes from the action wrapper.
 

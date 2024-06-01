@@ -2,7 +2,6 @@
 
 namespace R3bzya\ActionWrapper\Concerns;
 
-use Closure;
 use R3bzya\ActionWrapper\ActionWrapper;
 
 trait Conditionable
@@ -17,9 +16,7 @@ trait Conditionable
     public function when(mixed $condition, callable $callable): ActionWrapper|static
     {
         return $this->after(function (mixed $result) use ($condition, $callable) {
-            $condition = $condition instanceof Closure ? $condition($result) : $condition;
-
-            return $condition ? $callable($result) : $result;
+            return value($condition, $result) ? $callable($result) : $result;
         });
     }
 
@@ -33,9 +30,7 @@ trait Conditionable
     public function unless(mixed $condition, callable $callable): ActionWrapper|static
     {
         return $this->after(function (mixed $result) use ($condition, $callable) {
-            $condition = $condition instanceof Closure ? $condition($result) : $condition;
-
-            return $condition ? $result : $callable($result);
+            return value($condition, $result) ? $result : $callable($result);
         });
     }
 }
