@@ -162,7 +162,7 @@ The `safe` method returns false when an exception thrown.
 $this->safe();
 ```
 
-#### *tap(callable $decorator): ActionWrapper|static*
+#### *tap(callable $decorator = null): ActionWrapper|static*
 
 The `tap` method calls the given Closure with the action result then return the action result.
 
@@ -172,9 +172,9 @@ $this->tap(function (mixed $result): void {
 });
 ```
 
-#### *tapWhen(mixed $condition, callable $decorator): ActionWrapper|static*
+#### *tapWhen(mixed $condition, callable $decorator = null): ActionWrapper|static*
 
-The `tapWhen` method calls the given Closure then return the action result when the condition is truthy.
+The `tapWhen` method calls the given Closure when the condition is truthy then return the action result.
 
 ```
 $this->tapWhen(true, function (mixed $result): void {
