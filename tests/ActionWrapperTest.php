@@ -172,6 +172,31 @@ class ActionWrapperTest extends TestCase
         ];
     }
 
+    #[DataProvider('tapUnlessData')]
+    public function testTapUnless(mixed $condition, int $assertionsCount): void
+    {
+        $result = wrapper()
+            ->tapUnless($condition, fn(int $value) => $this->addToAssertionCount(1))
+            ->execute(true);
+
+        $this->assertTrue($result);
+        $this->assertEquals($assertionsCount, $this->numberOfAssertionsPerformed());
+    }
+
+    public static function tapUnlessData(): array
+    {
+        return [
+            [
+                false,
+                1,
+            ],
+            [
+                true,
+                0,
+            ],
+        ];
+    }
+
     #[DataProvider('whenData')]
     public function testWhen(mixed $condition, callable $callable, mixed $expected): void
     {

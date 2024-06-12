@@ -182,6 +182,16 @@ $this->tapWhen(true, function (mixed $result): void {
 });
 ```
 
+#### *tapUnless(mixed $condition, callable $callable = null): ActionWrapper|static*
+
+The `tapUnless` method calls the given Closure when the condition is falsy then return the action result.
+
+```
+$this->tapUnless(false, function (mixed $result): void {
+    //
+});
+```
+
 #### *throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static*
 
 The `throwIfNotDone` method will throw the given exception when the action result is false.

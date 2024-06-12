@@ -28,4 +28,16 @@ trait Tappable
     {
         return $this->when($condition, fn(mixed $result) => tap($result, $callable));
     }
+
+    /**
+     * When the condition is falsy call the given Closure, then return the action result.
+     *
+     * @param mixed $condition
+     * @param callable|null $callable
+     * @return ActionWrapper|static
+     */
+    public function tapUnless(mixed $condition, callable $callable = null): ActionWrapper|static
+    {
+        return $this->unless($condition, fn(mixed $result) => tap($result, $callable));
+    }
 }
