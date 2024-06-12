@@ -36,8 +36,8 @@ class ActionWrapperTest extends TestCase
     public function testInvokableDecorator(): void
     {
         $result = wrapper()
-            ->through(new readonly class(1) {
-                public function __construct(private int $value) {}
+            ->through(new class(1) {
+                public function __construct(private readonly int $value) {}
 
                 public function __invoke(array $arguments, Closure $next): int
                 {
@@ -269,13 +269,13 @@ class ActionWrapperTest extends TestCase
         $this->assertFalse(
             wrapper()
                 ->try(false)
-                ->execute(fn() => throw new RuntimeException)
+                ->execute(fn() => throw new RuntimeException),
         );
 
         $this->assertFalse(
             wrapper()
                 ->try(fn() => false)
-                ->execute(fn() => throw new RuntimeException)
+                ->execute(fn() => throw new RuntimeException),
         );
 
         $this->assertFalse(
@@ -285,7 +285,7 @@ class ActionWrapperTest extends TestCase
 
                     return false;
                 })
-                ->execute(fn() => throw new RuntimeException)
+                ->execute(fn() => throw new RuntimeException),
         );
     }
 
@@ -295,7 +295,7 @@ class ActionWrapperTest extends TestCase
             RuntimeException::class,
             wrapper()
                 ->catch()
-                ->execute(fn() => throw new RuntimeException)
+                ->execute(fn() => throw new RuntimeException),
         );
     }
 
@@ -304,7 +304,7 @@ class ActionWrapperTest extends TestCase
         $this->assertFalse(
             wrapper()
                 ->safe()
-                ->execute(fn() => throw new RuntimeException)
+                ->execute(fn() => throw new RuntimeException),
         );
     }
 }
