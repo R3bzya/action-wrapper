@@ -123,4 +123,16 @@ class ActionWrapperTest extends TestCase
 
         $this->assertSame(10, wrapper()->plus(5)->execute(5));
     }
+
+    public function testFlushPipes(): void
+    {
+        $wrapper = wrapper()
+            ->after(fn(int $value) => $value);
+
+        $this->assertCount(1, $wrapper->pipes());
+
+        $wrapper->flushPipes();
+
+        $this->assertCount(0, $wrapper->pipes());
+    }
 }

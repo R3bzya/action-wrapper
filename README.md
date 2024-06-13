@@ -85,6 +85,14 @@ The `decoratedMethods` method defines function names to be decorated. The defaul
 $this->decoratedMethods();
 ```
 
+#### *flushPipes(): ActionWrapper|static*
+
+The `flushPipes` method removes all pipes from the ActionWrapper instance.
+
+```
+$this->flushPipes();
+```
+
 #### *forgetActionWrapper(): ActionWrapper|static*
 
 The `forgetActionWrapper` method unsets the action wrapper from the action.
@@ -109,12 +117,12 @@ The `makeActionWrapper` method creates a new ActionWrapper instance.
 $this->makeActionWrapper();
 ```
 
-#### *resetActionWrapper(): ActionWrapper|static*
+#### *pipes(): array*
 
-The `resetActionWrapper` method removes all pipes from the action wrapper.
+The `pipes` method returns an array of pipes from ActionWrapper instance.
 
 ```
-$this->resetActionWrapper();
+$this->pipes();
 ```
 
 #### *through(callable $decorator): ActionWrapper|static*

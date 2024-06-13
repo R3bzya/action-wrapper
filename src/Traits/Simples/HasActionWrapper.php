@@ -84,16 +84,6 @@ trait HasActionWrapper
     }
 
     /**
-     * Remove all pipes from the action wrapper.
-     *
-     * @return ActionWrapper|static
-     */
-    public function resetActionWrapper(): ActionWrapper|static
-    {
-        return $this->getActionWrapper()->forgetPipes();
-    }
-
-    /**
      * Unset the action wrapper.
      *
      * @return ActionWrapper|static

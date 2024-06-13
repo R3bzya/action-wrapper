@@ -43,14 +43,24 @@ class ActionWrapper
     }
 
     /**
-     * Remove all pipes.
+     * Flush the existing pipes.
      *
      * @return static
      */
-    public function forgetPipes(): static
+    public function flushPipes(): static
     {
         $this->pipes = [];
 
         return $this;
+    }
+
+    /**
+     * Return all pipes.
+     *
+     * @return array
+     */
+    public function pipes(): array
+    {
+        return $this->pipes;
     }
 }
