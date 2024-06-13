@@ -17,7 +17,7 @@ trait HasActionWrapper
      *
      * @return string[]
      */
-    protected function decoratedMethods(): array
+    protected function decoratedFunctions(): array
     {
         return ['execute'];
     }
@@ -29,7 +29,7 @@ trait HasActionWrapper
      */
     public function makeActionWrapper(): ActionWrapper|static
     {
-        return new ActionWrapper($this, $this->decoratedMethods());
+        return new ActionWrapper($this, $this->decoratedFunctions());
     }
 
     /**

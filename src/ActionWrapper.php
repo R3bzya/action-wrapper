@@ -14,12 +14,12 @@ class ActionWrapper
 
     public function __construct(
         private readonly object $object,
-        private readonly array $methods = [],
+        private readonly array $functions = [],
     ) {}
 
     public function __call(string $name, array $arguments): mixed
     {
-        if (! in_array($name, $this->methods)) {
+        if (! in_array($name, $this->functions)) {
             return $this->forwardCallTo($this->object, $name, $arguments);
         }
 
