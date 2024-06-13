@@ -3,10 +3,13 @@
 namespace R3bzya\ActionWrapper\Traits\Simples;
 
 use Closure;
+use Illuminate\Support\Traits\Macroable;
 use R3bzya\ActionWrapper\ActionWrapper;
 
 trait HasActionWrapper
 {
+    use Macroable;
+
     protected ActionWrapper $actionWrapper;
 
     /**

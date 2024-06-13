@@ -5,9 +5,15 @@ namespace R3bzya\ActionWrapper\Tests;
 use Closure;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use R3bzya\ActionWrapper\Support\FluentAction;
 
 class ActionWrapperTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        FluentAction::flushMacros();
+    }
+
     public function testThrough(): void
     {
         $result = wrapper()
@@ -106,5 +112,15 @@ class ActionWrapperTest extends TestCase
         $this->assertTrue(wrapper()->execute(fn() => true));
         $this->assertTrue(wrapper()->execute(true));
         $this->assertTrue(wrapper()->execute(fn(bool $value) => $value, true));
+    }
+
+    public function testMacro(): void
+    {
+        FluentAction::macro('plus', function (int $value) {
+            /** @var FluentAction $this */
+            return $this->after(fn(int $result) => $result + $value);
+        });
+
+        $this->assertSame(10, wrapper()->plus(5)->execute(5));
     }
 }
