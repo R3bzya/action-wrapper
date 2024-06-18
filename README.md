@@ -23,21 +23,21 @@ You can make a new instance with the `wrapper` function.
 >
 >$action->execute(fn(): bool => true);
 >```
->
+The shortest way:
 >```
->wrapper()->execute(true);
+>wrapper()->execute(fn(): bool => true);
 >```
 
 ## Available methods
 
 ### Base methods
 
-> ***Note:*** These methods available in `Traits\Simples\HasActionWrapper`.
+> ***Note:*** These methods available in `Support\Traits\Simples\HasActionWrapper`.
 >
 >```
 >class Example
 >{
->    use \R3bzya\ActionWrapper\Traits\Simples\HasActionWrapper;
+>    use \R3bzya\ActionWrapper\Support\Traits\Simples\HasActionWrapper;
 >
 >    ...
 >}
@@ -135,11 +135,11 @@ $this->through(fn(array $arguments, \Closure $next): \Closure => $next($attribut
 
 ### Extended methods
 
-> ***Note:*** The next methods available in `Traits\HasActionWrapper`.
+> ***Note:*** The next methods available in `Support\Traits\HasActionWrapper`.
 >```
 >class Example
 >{
->    use \R3bzya\ActionWrapper\Traits\HasActionWrapper;
+>    use \R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;
 >
 >    ...
 >}

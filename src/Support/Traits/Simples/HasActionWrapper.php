@@ -1,6 +1,6 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Traits\Simples;
+namespace R3bzya\ActionWrapper\Support\Traits\Simples;
 
 use Closure;
 use Illuminate\Support\Traits\Macroable;
