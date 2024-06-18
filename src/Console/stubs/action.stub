@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+{{ classReadonly }} {{ class }}
+{
+    public function execute(): {{ type }}
+    {
+        // TODO: Implement execute() method.
+    }
+}

@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ dtoNamespace }};
+
+{{ classReadonly }} {{ class }}
+{
+    public function execute({{ dtoClass }} ${{ dtoVariable }}): {{ type }}
+    {
+        // TODO: Implement execute() method.
+    }
+}

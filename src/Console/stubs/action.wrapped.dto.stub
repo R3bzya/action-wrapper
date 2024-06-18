@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ dtoNamespace }};
+use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;
+
+{{ classReadonly }} {{ class }}
+{
+    use HasActionWrapper;
+
+    public function execute({{ dtoClass }} ${{ dtoVariable }}): {{ type }}
+    {
+        // TODO: Implement execute() method.
+    }
+}

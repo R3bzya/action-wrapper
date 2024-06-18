@@ -39,5 +39,12 @@
         }
     ],
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "R3bzya\\ActionWrapper\\Providers\\WrapperServiceProvider"
+            ]
+        }
+    }
 }

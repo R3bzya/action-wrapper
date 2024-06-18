@@ -287,6 +287,34 @@ $this->when(fn(mixed $result): mixed => true, fn(): mixed => true);
 $this->when(true, fn(mixed $result): mixed => $result);
 ```
 
+## Artisan commands
+
+The `make:action` command makes the action class.
+The command will try to guess the base action on the model to use the template.
+Also, you don't have to specify the model,
+use the name 'CreateUser' or 'CreateUserAction' with the option `-m` and watch the magic.
+If the model has a directory (e.g. 'User'), you will use the name 'User/CreateUser' or 'User/CreateUserAction'.
+
+#### make:action
+
+```
+php artisan make:action FooAction
+```
+
+You can use the option `-d` to create DTO.
+
+```
+php artisan make:action FooAction -d
+```
+
+#### make:dto
+
+The `make:dto` command makes the dto class.
+
+```
+php artisan make:dto FooDto
+```
+
 ## Testing
 
 ```
