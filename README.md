@@ -153,6 +153,15 @@ The `catch` method returns an exception to respond without throwing an exception
 $this->catch();
 ```
 
+#### *retry(int $attempts): ActionWrapper|static*
+
+The `retry` method retries the action while it has an exception.
+
+```
+$this->retry(1);
+```
+
+
 #### *refreshModel(): ActionWrapper|static*
 
 The `refreshModel` method reloads the model instance with fresh attributes from the
