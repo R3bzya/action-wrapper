@@ -1,11 +1,10 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Console;
+namespace R3bzya\ActionWrapper\Tests\Feature\Console;
 
 use R3bzya\ActionWrapper\Console\MakeDtoCommand;
-use R3bzya\ActionWrapper\Tests\ConsoleTestCase;
 
-class MakeDtoCommandTest extends ConsoleTestCase
+class MakeDtoCommandTest extends TestCase
 {
     protected array $files = [
         'app/Dto/*',

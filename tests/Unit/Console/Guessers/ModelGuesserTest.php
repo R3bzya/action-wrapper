@@ -1,12 +1,12 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Console\Guessers;
+namespace R3bzya\ActionWrapper\Tests\Unit\Console\Guessers;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use R3bzya\ActionWrapper\Console\Guessers\ModelGuesser;
-use R3bzya\ActionWrapper\Tests\ConsoleTestCase;
+use R3bzya\ActionWrapper\Tests\Feature\TestCase;
 
-class ModelGuesserTest extends ConsoleTestCase
+class ModelGuesserTest extends TestCase
 {
     #[DataProvider('parseNameData')]
     public function testParseName(string $name): void

@@ -1,12 +1,11 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Console;
+namespace R3bzya\ActionWrapper\Tests\Feature\Console;
 
 use Illuminate\Support\Facades\App;
 use R3bzya\ActionWrapper\Console\MakeActionCommand;
-use R3bzya\ActionWrapper\Tests\ConsoleTestCase;
 
-class MakeActionCommandTest extends ConsoleTestCase
+class MakeActionCommandTest extends TestCase
 {
     protected array $files = [
         'app/Actions/*',
