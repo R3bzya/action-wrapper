@@ -153,6 +153,36 @@ The `catch` method returns an exception to respond without throwing an exception
 $this->catch();
 ```
 
+#### *payload(callable $callable): ActionWrapper|static*
+
+The `payload` method aggregates action data then set it in a payload.
+If you need to change a result, change it in the payload by setters.
+
+```
+wrapper()->payload(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload): void {
+    //
+});
+```
+#### *public function payloadWhen(callable $callable, mixed $value): ActionWrapper|static*
+
+The `payloadUnless` method applies the given callable on a payload if the given value is truthy.
+
+```
+wrapper()->payload(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload): void {
+    //
+}, true);
+```
+
+#### *public function payloadUnless(callable $callable, mixed $value): ActionWrapper|static*
+
+The `payloadUnless` method applies the given callable on a payload if the given value is falsy.
+
+```
+wrapper()->payloadUnless(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload): void {
+    //
+}, false);
+```
+
 #### *retry(int $attempts): ActionWrapper|static*
 
 The `retry` method retries the action while it has an exception.

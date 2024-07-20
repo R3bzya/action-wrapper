@@ -4,6 +4,7 @@ namespace R3bzya\ActionWrapper\Support\Traits;
 
 use R3bzya\ActionWrapper\Concerns\Conditionable;
 use R3bzya\ActionWrapper\Concerns\Exceptionable;
+use R3bzya\ActionWrapper\Concerns\HasPayload;
 use R3bzya\ActionWrapper\Concerns\InteractsWithModel;
 use R3bzya\ActionWrapper\Concerns\Retryable;
 use R3bzya\ActionWrapper\Concerns\Tappable;
@@ -17,6 +18,7 @@ trait HasActionWrapper
         Tappable,
         Transactional,
         Exceptionable,
+        HasPayload,
         InteractsWithModel,
         Retryable;
 }
