@@ -153,6 +153,57 @@ The `catch` method returns an exception to respond without throwing an exception
 $this->catch();
 ```
 
+#### *log(callable $writer, mixed $value = true): ActionWrapper|static*
+
+The `log` method the default method for logging action data.
+Write the log if the given value is truthy.
+
+```
+wrapper()->log(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload) {
+    \Illuminate\Support\Facades\Log::info('Payload data', $payload->toArray());
+});
+```
+
+#### *logArguments(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+
+The `logArguments` method logs an arguments.
+
+```
+wrapper()->logArguments('logArguments');
+```
+
+#### *logExceptions(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+
+The `logExceptions` method logs an exception if an exception was thrown.
+
+```
+wrapper()->logExceptions('logExceptions');
+```
+
+#### *logIfNotDone(callable $writer = null, mixed $value = true): ActionWrapper|static*
+
+The `logIfNotDone` method logs action data if an exception was thrown or the result is equal to false.
+
+```
+wrapper()->logIfNotDone('logIfNotDone');
+```
+
+#### *logPerformance(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+
+The `logPerformance` method logs an action performance in milliseconds.
+
+```
+wrapper()->logPerformance('logPerformance');
+```
+
+#### *logResult(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+
+The `logResult` method logs an action result. If the action thrown an exception, the result won't be logged.
+
+```
+wrapper()->logResult('logResult');
+```
+
 #### *payload(callable $callable): ActionWrapper|static*
 
 The `payload` method aggregates action data then set it in a payload.

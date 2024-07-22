@@ -6,6 +6,7 @@ use R3bzya\ActionWrapper\Concerns\Conditionable;
 use R3bzya\ActionWrapper\Concerns\Exceptionable;
 use R3bzya\ActionWrapper\Concerns\HasPayload;
 use R3bzya\ActionWrapper\Concerns\InteractsWithModel;
+use R3bzya\ActionWrapper\Concerns\Loggable;
 use R3bzya\ActionWrapper\Concerns\Retryable;
 use R3bzya\ActionWrapper\Concerns\Tappable;
 use R3bzya\ActionWrapper\Concerns\Transactional;
@@ -15,10 +16,11 @@ trait HasActionWrapper
 {
     use HasSimpleActionWrapper,
         Conditionable,
-        Tappable,
-        Transactional,
         Exceptionable,
         HasPayload,
         InteractsWithModel,
-        Retryable;
+        Loggable,
+        Retryable,
+        Tappable,
+        Transactional;
 }
