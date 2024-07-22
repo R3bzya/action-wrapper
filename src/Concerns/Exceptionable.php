@@ -27,7 +27,7 @@ trait Exceptionable
     /**
      * Returns false when an exception thrown.
      */
-    public function safe(): ActionWrapper|static
+    public function falseInsteadOfThrowable(): ActionWrapper|static
     {
         return $this->try(false);
     }

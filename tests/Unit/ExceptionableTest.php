@@ -71,11 +71,11 @@ class ExceptionableTest extends TestCase
         );
     }
 
-    public function testSafe(): void
+    public function testFalseInsteadOfThrowable(): void
     {
         $this->assertFalse(
             wrapper()
-                ->safe()
+                ->falseInsteadOfThrowable()
                 ->execute(fn() => throw new RuntimeException),
         );
     }

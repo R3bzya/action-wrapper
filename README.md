@@ -252,12 +252,12 @@ database. [see](https://laravel.com/docs/10.x/eloquent#refreshing-models)
 $this->refreshModel();
 ```
 
-#### *safe(): ActionWrapper|static*
+#### *falseInsteadOfThrowable(): ActionWrapper|static*
 
-The `safe` method returns false when an exception thrown.
+The `falseInsteadOfThrowable` method returns false when an exception thrown.
 
 ```
-$this->safe();
+$this->falseInsteadOfThrowable();
 ```
 
 #### *tap(callable $decorator = null): ActionWrapper|static*
