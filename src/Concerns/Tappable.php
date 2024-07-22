@@ -8,9 +8,6 @@ trait Tappable
 {
     /**
      * Call the given Closure then return the action result.
-     *
-     * @param callable|null $decorator
-     * @return ActionWrapper|static
      */
     public function tap(callable $decorator = null): ActionWrapper|static
     {
@@ -19,10 +16,6 @@ trait Tappable
 
     /**
      * When the condition is truthy call the given Closure, then return the action result.
-     *
-     * @param mixed $condition
-     * @param callable|null $callable
-     * @return ActionWrapper|static
      */
     public function tapWhen(mixed $condition, callable $callable = null): ActionWrapper|static
     {
@@ -31,10 +24,6 @@ trait Tappable
 
     /**
      * When the condition is falsy call the given Closure, then return the action result.
-     *
-     * @param mixed $condition
-     * @param callable|null $callable
-     * @return ActionWrapper|static
      */
     public function tapUnless(mixed $condition, callable $callable = null): ActionWrapper|static
     {

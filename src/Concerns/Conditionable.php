@@ -8,10 +8,6 @@ trait Conditionable
 {
     /**
      * Apply the given callback when the condition is truthy.
-     *
-     * @param mixed $condition
-     * @param callable $callable
-     * @return ActionWrapper|static
      */
     public function when(mixed $condition, callable $callable): ActionWrapper|static
     {
@@ -22,10 +18,6 @@ trait Conditionable
 
     /**
      * Apply the given callback when the condition is falsy.
-     *
-     * @param mixed $condition
-     * @param callable $callable
-     * @return ActionWrapper|static
      */
     public function unless(mixed $condition, callable $callable): ActionWrapper|static
     {

@@ -31,9 +31,6 @@ class ActionWrapper
 
     /**
      * Add the pipe.
-     *
-     * @param callable $pipe
-     * @return static
      */
     public function through(callable $pipe): static
     {
@@ -44,8 +41,6 @@ class ActionWrapper
 
     /**
      * Flush the existing pipes.
-     *
-     * @return static
      */
     public function flushPipes(): static
     {
@@ -56,8 +51,6 @@ class ActionWrapper
 
     /**
      * Return all pipes.
-     *
-     * @return array
      */
     public function pipes(): array
     {

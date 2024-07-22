@@ -10,9 +10,6 @@ trait Transactional
 {
     /**
      * Execute an action within a transaction.
-     *
-     * @param int $attempts
-     * @return ActionWrapper|static
      */
     public function transaction(int $attempts = 1): ActionWrapper|static
     {

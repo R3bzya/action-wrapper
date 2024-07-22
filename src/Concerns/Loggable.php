@@ -11,10 +11,6 @@ trait Loggable
 {
     /**
      * Write the logs here.
-     *
-     * @param callable $writer
-     * @param mixed $condition
-     * @return ActionWrapper|static
      */
     public function log(callable $callable, mixed $value = true): ActionWrapper|static
     {
@@ -23,10 +19,6 @@ trait Loggable
 
     /**
      * Log an exception if the exception is thrown.
-     *
-     * @param string|Stringable $message
-     * @param mixed $condition
-     * @return ActionWrapper|static
      */
     public function logExceptions(string|Stringable $message, mixed $value = true): ActionWrapper|static
     {
@@ -39,10 +31,6 @@ trait Loggable
 
     /**
      * Log an action arguments.
-     *
-     * @param string|Stringable $message
-     * @param mixed $condition
-     * @return ActionWrapper|static
      */
     public function logArguments(string|Stringable $message, mixed $value = true): ActionWrapper|static
     {
@@ -53,10 +41,6 @@ trait Loggable
 
     /**
      * Log a result if the result is present.
-     *
-     * @param string|Stringable $message
-     * @param mixed $condition
-     * @return ActionWrapper|static
      */
     public function logResult(string|Stringable $message, mixed $value = true): ActionWrapper|static
     {
@@ -69,10 +53,6 @@ trait Loggable
 
     /**
      * Log an action performance.
-     *
-     * @param string|Stringable $message
-     * @param mixed $condition
-     * @return ActionWrapper|static
      */
     public function logPerformance(string|Stringable $message, mixed $value = true): ActionWrapper|static
     {
@@ -83,10 +63,6 @@ trait Loggable
 
     /**
      * Log payload data if an action is not done.
-     *
-     * @param callable|null $writer
-     * @param mixed $condition
-     * @return ActionWrapper|static
      */
     public function logIfNotDone(callable $writer = null, mixed $value = true): ActionWrapper|static
     {

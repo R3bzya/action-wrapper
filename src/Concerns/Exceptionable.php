@@ -12,9 +12,6 @@ trait Exceptionable
 {
     /**
      * Defines how to respond to a thrown exception.
-     *
-     * @param mixed $value
-     * @return ActionWrapper|static
      */
     public function try(mixed $value): ActionWrapper|static
     {
@@ -29,8 +26,6 @@ trait Exceptionable
 
     /**
      * Returns false when an exception thrown.
-     *
-     * @return ActionWrapper|static
      */
     public function safe(): ActionWrapper|static
     {
@@ -39,8 +34,6 @@ trait Exceptionable
 
     /**
      * Returns an exception to respond without throwing an exception.
-     *
-     * @return ActionWrapper|static
      */
     public function catch(): ActionWrapper|static
     {
@@ -49,10 +42,6 @@ trait Exceptionable
 
     /**
      * Throw an exception when condition is truthy.
-     *
-     * @param mixed $condition
-     * @param Throwable $throwable
-     * @return ActionWrapper|static
      */
     public function throwWhen(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static
     {
@@ -61,10 +50,6 @@ trait Exceptionable
 
     /**
      * Throw an exception when condition is falsy.
-     *
-     * @param mixed $condition
-     * @param Throwable $throwable
-     * @return ActionWrapper|static
      */
     public function throwUnless(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static
     {
@@ -73,9 +58,6 @@ trait Exceptionable
 
     /**
      * Throw an exception when an action result is false.
-     *
-     * @param Throwable $throwable
-     * @return ActionWrapper|static
      */
     public function throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static
     {

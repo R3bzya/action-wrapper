@@ -24,8 +24,6 @@ trait HasActionWrapper
 
     /**
      * Create a new ActionWrapper instance.
-     *
-     * @return ActionWrapper|static
      */
     public function makeActionWrapper(): ActionWrapper|static
     {
@@ -34,8 +32,6 @@ trait HasActionWrapper
 
     /**
      * Get or create the action wrapper.
-     *
-     * @return ActionWrapper|static
      */
     public function getActionWrapper(): ActionWrapper|static
     {
@@ -44,9 +40,6 @@ trait HasActionWrapper
 
     /**
      * Add the callback through which the action will be sent.
-     *
-     * @param callable $decorator
-     * @return ActionWrapper|static
      */
     public function through(callable $decorator): ActionWrapper|static
     {
@@ -55,9 +48,6 @@ trait HasActionWrapper
 
     /**
      * Call the given Closure before an action execution.
-     *
-     * @param callable $decorator
-     * @return ActionWrapper|static
      */
     public function before(callable $decorator): ActionWrapper|static
     {
@@ -74,9 +64,6 @@ trait HasActionWrapper
 
     /**
      * Call the given Closure after an action execution.
-     *
-     * @param callable $decorator
-     * @return ActionWrapper|static
      */
     public function after(callable $decorator): ActionWrapper|static
     {
@@ -85,8 +72,6 @@ trait HasActionWrapper
 
     /**
      * Unset the action wrapper.
-     *
-     * @return ActionWrapper|static
      */
     public function forgetActionWrapper(): ActionWrapper|static
     {

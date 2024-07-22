@@ -9,8 +9,6 @@ trait InteractsWithModel
 {
     /**
      * Reload the model instance with fresh attributes from the database.
-     *
-     * @return ActionWrapper|static
      */
     public function refreshModel(): ActionWrapper|static
     {
@@ -19,8 +17,6 @@ trait InteractsWithModel
 
     /**
      * Unset all the loaded relations for the model instance.
-     *
-     * @return ActionWrapper|static
      */
     public function unsetModelRelations(): ActionWrapper|static
     {

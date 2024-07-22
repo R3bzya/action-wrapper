@@ -10,9 +10,6 @@ trait HasPayload
 {
     /**
      * Get the payload when the condition is trusty.
-     *
-     * @param callable $callable
-     * @return ActionWrapper|static
      */
     public function payload(callable $callable): ActionWrapper|static
     {
