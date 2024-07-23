@@ -1,6 +1,6 @@
 # Action Wrapper
 
-ActionWrapper is a simple yet flexible action decorator.
+ActionWrapper is a simple and flexible action decorator.
 
 ## Installation
 
