@@ -270,9 +270,9 @@ $this->tap(function (mixed $result): void {
 });
 ```
 
-#### *tapWhen(mixed $condition, callable $decorator = null): ActionWrapper|static*
+#### *tapWhen(mixed $value, callable $decorator = null): ActionWrapper|static*
 
-The `tapWhen` method calls the given Closure when the condition is truthy then return the action result.
+The `tapWhen` method calls the given Closure if the given value is truthy then return the action result.
 
 ```
 $this->tapWhen(true, function (mixed $result): void {
@@ -280,9 +280,9 @@ $this->tapWhen(true, function (mixed $result): void {
 });
 ```
 
-#### *tapUnless(mixed $condition, callable $callable = null): ActionWrapper|static*
+#### *tapUnless(mixed $value, callable $callable = null): ActionWrapper|static*
 
-The `tapUnless` method calls the given Closure when the condition is falsy then return the action result.
+The `tapUnless` method calls the given Closure if the given value is falsy then return the action result.
 
 ```
 $this->tapUnless(false, function (mixed $result): void {
@@ -298,9 +298,9 @@ The `throwIfNotDone` method will throw the given exception when the action resul
 $this->throwIfNotDone();
 ```
 
-#### *throwUnless(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static*
+#### *throwUnless(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static*
 
-The `throwUnless` method will throw the given exception when the condition evaluates to false.
+The `throwUnless` method will throw the given exception if the given value evaluates to false.
 
 ```
 $this->throwUnless(false);
@@ -310,9 +310,9 @@ $this->throwUnless(false);
 $this->throwUnless(fn(mixed $result): mixed => false);
 ```
 
-#### *throwWhen(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static*
+#### *throwWhen(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static*
 
-The `throwWhen` method will throw the given exception when the condition evaluates to true.
+The `throwWhen` method will throw the given exception if the given value evaluates to true.
 
 ```
 $this->throwWhen(true);
@@ -342,10 +342,10 @@ $this->try(fn() => false);
 $this->try(fn(Throwable $e) => $e);
 ```
 
-#### *unless(mixed $condition, callable $callable): ActionWrapper|static*
+#### *unless(mixed $value, callable $callable): ActionWrapper|static*
 
-The `unless` method will execute the given callback when the condition evaluates to false,
-otherwise the `decoratedMethod` execution result will be returned.
+The `unless` method executes the given callback if the given value is falsy,
+or the action result will be return.
 
 ```
 $this->unless(fn(mixed $result): mixed => false, fn(): mixed => false);
@@ -364,10 +364,10 @@ model. [see](https://laravel.com/api/10.x/Illuminate/Database/Eloquent/Concerns/
 $this->unsetModelRelations();
 ```
 
-#### *when(mixed $condition, callable $callable): ActionWrapper|static*
+#### *when(mixed $value, callable $callable): ActionWrapper|static*
 
-The `when` method will execute the given callback when the condition evaluates to true,
-otherwise the `decoratedMethod` execution result will be returned.
+The `when` method executes the given callable if the given value is truthy,
+or the action result will be return.
 
 ```
 $this->when(fn(mixed $result): mixed => true, fn(): mixed => true);

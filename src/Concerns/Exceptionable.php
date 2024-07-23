@@ -41,19 +41,19 @@ trait Exceptionable
     }
 
     /**
-     * Throw an exception when condition is truthy.
+     * Throw an exception if the given value is truthy.
      */
-    public function throwWhen(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static
+    public function throwWhen(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static
     {
-        return $this->when($condition, fn() => throw $throwable);
+        return $this->when($value, fn() => throw $throwable);
     }
 
     /**
-     * Throw an exception when condition is falsy.
+     * Throw an exception if the given value is falsy.
      */
-    public function throwUnless(mixed $condition, Throwable $throwable = new RuntimeException): ActionWrapper|static
+    public function throwUnless(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static
     {
-        return $this->unless($condition, fn() => throw $throwable);
+        return $this->unless($value, fn() => throw $throwable);
     }
 
     /**

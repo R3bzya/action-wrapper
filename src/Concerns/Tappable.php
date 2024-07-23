@@ -15,18 +15,18 @@ trait Tappable
     }
 
     /**
-     * When the condition is truthy call the given Closure, then return the action result.
+     * When the given value is truthy call the given Closure, then return the action result.
      */
-    public function tapWhen(mixed $condition, callable $callable = null): ActionWrapper|static
+    public function tapWhen(mixed $value, callable $callable = null): ActionWrapper|static
     {
-        return $this->when($condition, fn(mixed $result) => tap($result, $callable));
+        return $this->when($value, fn(mixed $result) => tap($result, $callable));
     }
 
     /**
-     * When the condition is falsy call the given Closure, then return the action result.
+     * When the given value is falsy call the given Closure, then return the action result.
      */
-    public function tapUnless(mixed $condition, callable $callable = null): ActionWrapper|static
+    public function tapUnless(mixed $value, callable $callable = null): ActionWrapper|static
     {
-        return $this->unless($condition, fn(mixed $result) => tap($result, $callable));
+        return $this->unless($value, fn(mixed $result) => tap($result, $callable));
     }
 }
