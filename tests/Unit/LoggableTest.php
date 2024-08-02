@@ -113,43 +113,51 @@ class LoggableTest extends TestCase
         Log::shouldReceive('warning')
             ->once()
             ->withArgs(function (string $message, array $context = []) {
-                $this->assertSame('The action is not done.', $message);
-
-                foreach ([
-                    'passes',
+                $this->assertEquals([
+                    'started_at',
                     'arguments',
                     'result',
-                    'started_at',
-                ] as $key) {
-                    $this->assertArrayHasKey($key, $context);
-                }
+                    'completed_at',
+                ], array_keys($context));
 
-                $this->assertTrue($context['passes']);
+                $this->assertSame('The action is not done.', $message);
                 $this->assertSame([false], $context['arguments']);
                 $this->assertFalse($context['result']);
                 $this->assertInstanceOf(Carbon::class, $context['started_at']);
+                $this->assertInstanceOf(Carbon::class, $context['completed_at']);
                 $this->assertArrayNotHasKey('exception', $context);
 
                 return true;
             });
 
         $this->assertFalse(wrapper()->logIfNotDone()->execute(false));
+    }
 
-        $this->assertLog('warning', 'The result is false.');
-
-        $this->assertFalse(wrapper()
-            ->logIfNotDone(fn() => Log::warning('The result is false.'))
-            ->execute(false)
-        );
-
+    public function testLogIfFailed(): void
+    {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Action was failed.');
+        $this->expectExceptionMessage('The action is failed.');
 
-        $this->assertLog('warning', 'The exception was threw.');
+        Log::shouldReceive('warning')
+            ->once()
+            ->withArgs(function (string $message, array $context = []) {
+                $this->assertEquals([
+                    'started_at',
+                    'arguments',
+                    'exception',
+                    'completed_at',
+                ], array_keys($context));
 
-        wrapper()
-            ->logIfNotDone(fn() => Log::warning('The exception was threw.'))
-            ->execute(fn() => throw new RuntimeException('Action was failed.'));
+                $this->assertSame('The action is failed.', $message);
+                $this->assertIsArray($context['arguments']);
+                $this->assertInstanceOf(Carbon::class, $context['started_at']);
+                $this->assertInstanceOf(Carbon::class, $context['completed_at']);
+                $this->assertArrayNotHasKey('result', $context);
+
+                return true;
+            });
+
+        $this->assertFalse(wrapper()->logIfFailed()->execute(fn() => throw new RuntimeException('The action is failed.')));
     }
 
     private function assertLog(string $method, string $expectedMessage, array $expectedContext = []): void

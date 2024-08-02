@@ -1,8 +1,14 @@
 <?php
 
+use R3bzya\ActionWrapper\Support\Payloads\Payload;
+
 return [
     // The default model key type, when the model key type did not define
     'model_key_type' => 'int',
+
+    // The default container which contains of action data
+    // it will implement \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload
+    'payload' => Payload::class,
 
     'action' => [
         // The default return type of actions without a model

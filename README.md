@@ -153,13 +153,13 @@ The `catch` method returns an exception to respond without throwing an exception
 wrapper()->catch();
 ```
 
-#### *log(callable $writer, mixed $value = true): ActionWrapper|static*
+#### *log(callable $callable, mixed $value = true): ActionWrapper|static*
 
 The `log` method the default method for logging action data.
 Write the log if the given value is truthy.
 
 ```php
-wrapper()->log(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload) {
+wrapper()->log(function (\R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload) {
     \Illuminate\Support\Facades\Log::info('Payload data', $payload->toArray());
 });
 ```
@@ -180,12 +180,20 @@ The `logExceptions` method logs an exception if an exception was thrown.
 wrapper()->logExceptions('logExceptions');
 ```
 
-#### *logIfNotDone(callable $writer = null, mixed $value = true): ActionWrapper|static*
+#### *logIfNotDone(callable|\Stringable|string $message = null, mixed $value = true): ActionWrapper|static*
 
-The `logIfNotDone` method logs action data if an exception was thrown or the result is equal to false.
+The `logIfNotDone` method logs action data if the exception was thrown NotDoneException or the result is equal to false.
 
 ```php
 wrapper()->logIfNotDone('logIfNotDone');
+```
+
+#### *logIfFailed(callable|\Stringable|string $message = null, mixed $value = true): ActionWrapper|static*
+
+The `logIfFailed` method logs action data if the exception was thrown or the result is not present in payload.
+
+```php
+wrapper()->logIfFailed('logIfFailed');
 ```
 
 #### *logPerformance(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
@@ -204,33 +212,39 @@ The `logResult` method logs an action result. If the action thrown an exception,
 wrapper()->logResult('logResult');
 ```
 
-#### *payload(callable $callable): ActionWrapper|static*
+#### *payload(callable $callable, \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload|string|null $payload = null): ActionWrapper|static*
 
 The `payload` method aggregates action data then set it in a payload.
 If you need to change a result, change it in the payload by setters.
 
 ```php
-wrapper()->payload(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload): void {
+wrapper()->payload(function (
+    \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload,
+): void {
     //
 });
 ```
 
-#### *public function payloadWhen(callable $callable, mixed $value): ActionWrapper|static*
+#### *payloadWhen(callable $callable, mixed $value, \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload|string|null $payload = null): ActionWrapper|static*
 
 The `payloadWhen` method applies the given callable on a payload if the given value is truthy.
 
 ```php
-wrapper()->payloadWhen(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload): void {
+wrapper()->payloadWhen(function (
+    \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload,
+): void {
     //
 }, true);
 ```
 
-#### *public function payloadUnless(callable $callable, mixed $value): ActionWrapper|static*
+#### *payloadUnless(callable $callable, mixed $value, \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload|string|null $payload = null): ActionWrapper|static*
 
 The `payloadUnless` method applies the given callable on a payload if the given value is falsy.
 
 ```php
-wrapper()->payloadUnless(function (\R3bzya\ActionWrapper\Support\Payloads\Payload $payload): void {
+wrapper()->payloadUnless(function (
+    \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload,
+): void {
     //
 }, false);
 ```

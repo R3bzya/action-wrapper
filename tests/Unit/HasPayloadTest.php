@@ -4,12 +4,21 @@ namespace R3bzya\ActionWrapper\Tests\Unit;
 
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 use R3bzya\ActionWrapper\Support\Payloads\Payload;
+use R3bzya\ActionWrapper\Tests\Feature\TestCase;
 use RuntimeException;
 
 class HasPayloadTest extends TestCase
 {
+    public function testPayload(): void
+    {
+        wrapper()
+            ->payload(fn(Payload $payload) => $this->addToAssertionCount(1))
+            ->execute(true);
+
+        $this->assertEquals(1, $this->numberOfAssertionsPerformed());
+    }
+
     public function testResult(): void
     {
         $expected = Str::random(4);
@@ -36,42 +45,6 @@ class HasPayloadTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    #[DataProvider('passesData')]
-    public function testPasses(bool $value): void
-    {
-        wrapper()
-            ->payload(function (Payload $payload) {
-                $this->assertTrue($payload->passes());
-            })
-            ->execute($value);
-    }
-
-    public static function passesData(): array
-    {
-        return [
-            [true],
-            [false],
-        ];
-    }
-
-    #[DataProvider('failsData')]
-    public function testFails(bool $value): void
-    {
-        wrapper()
-            ->payload(function (Payload $payload) {
-                $this->assertFalse($payload->fails());
-            })
-            ->execute($value);
-    }
-
-    public static function failsData(): array
-    {
-        return [
-            [true],
-            [false],
-        ];
-    }
-
     public function testHasException(): void
     {
         $this->expectException(RuntimeException::class);
@@ -79,51 +52,16 @@ class HasPayloadTest extends TestCase
 
         wrapper()
             ->payload(function (Payload $payload) {
-                $this->assertTrue($payload->fails());
-                $this->assertTrue($payload->hasException());
                 $this->assertInstanceOf(RuntimeException::class, $payload->getException());
             })
             ->execute(fn() => throw new RuntimeException('Hello world!'));
-    }
-
-    public function testHasNotException(): void
-    {
-        wrapper()
-            ->payload(function (Payload $payload) {
-                $this->assertTrue($payload->passes());
-                $this->assertTrue($payload->hasNotException());
-            })
-            ->execute(true);
-    }
-
-    #[DataProvider('hasNotDoneData')]
-    public function testHasNotDone(bool $expected, mixed $value): void
-    {
-        try {
-            wrapper()
-                ->payload(function (Payload $payload) use ($expected) {
-                    $this->assertSame($expected, $payload->isNotCompleted());
-                })
-                ->execute($value);
-        } catch (RuntimeException $e) {
-            $this->assertSame('Hello world!', $e->getMessage());
-        }
-    }
-
-    public static function hasNotDoneData(): array
-    {
-        return [
-            [false, true],
-            [true, false],
-            [true, fn() => throw new RuntimeException('Hello world!')],
-        ];
     }
 
     #[DataProvider('payloadWhenData')]
     public function testPayloadWhen(int $expectedAssertionsCount, mixed $value): void
     {
         wrapper()
-            ->payloadWhen(function (Payload $payload) {
+            ->payloadWhen(function () {
                 $this->addToAssertionCount(1);
             }, $value)
             ->execute(true);
@@ -145,7 +83,7 @@ class HasPayloadTest extends TestCase
     public function testPayloadUnless(int $expectedAssertionsCount, mixed $value): void
     {
         wrapper()
-            ->payloadUnless(function (Payload $payload) {
+            ->payloadUnless(function () {
                 $this->addToAssertionCount(1);
             }, $value)
             ->execute(true);
