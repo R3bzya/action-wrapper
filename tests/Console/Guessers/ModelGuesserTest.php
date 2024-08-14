@@ -1,10 +1,10 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Unit\Console\Guessers;
+namespace R3bzya\ActionWrapper\Tests\Console\Guessers;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use R3bzya\ActionWrapper\Console\Guessers\ModelGuesser;
-use R3bzya\ActionWrapper\Tests\Feature\TestCase;
+use R3bzya\ActionWrapper\Tests\TestCase;
 
 class ModelGuesserTest extends TestCase
 {

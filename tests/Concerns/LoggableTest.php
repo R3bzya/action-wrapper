@@ -1,12 +1,12 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Unit;
+namespace R3bzya\ActionWrapper\Tests\Concerns;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use PHPUnit\Framework\Attributes\DataProvider;
 use R3bzya\ActionWrapper\Support\Payloads\Payload;
-use R3bzya\ActionWrapper\Tests\Feature\TestCase;
+use R3bzya\ActionWrapper\Tests\TestCase;
 use RuntimeException;
 
 class LoggableTest extends TestCase

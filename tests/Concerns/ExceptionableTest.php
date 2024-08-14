@@ -1,6 +1,6 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Unit;
+namespace R3bzya\ActionWrapper\Tests\Concerns;
 
 use PHPUnit\Framework\TestCase;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;

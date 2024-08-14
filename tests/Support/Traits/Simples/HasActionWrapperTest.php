@@ -1,13 +1,13 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Unit;
+namespace R3bzya\ActionWrapper\Tests\Support\Traits\Simples;
 
 use Closure;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use R3bzya\ActionWrapper\Support\FluentAction;
 
-class ActionWrapperTest extends TestCase
+class HasActionWrapperTest extends TestCase
 {
     protected function tearDown(): void
     {

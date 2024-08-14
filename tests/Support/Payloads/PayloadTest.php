@@ -1,6 +1,6 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Unit\Support\Payload;
+namespace R3bzya\ActionWrapper\Tests\Support\Payloads;
 
 use Closure;
 use Illuminate\Support\Carbon;

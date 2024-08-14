@@ -1,6 +1,6 @@
 <?php
 
-namespace R3bzya\ActionWrapper\Tests\Unit\Console\Guessers;
+namespace R3bzya\ActionWrapper\Tests\Console\Guessers;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
