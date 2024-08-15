@@ -3,7 +3,7 @@
 use R3bzya\ActionWrapper\Support\Payloads\Payload;
 
 return [
-    // The default model key type, when the model key type did not define
+    // The default model key type is used when the model does not specify a key type.
     'model_key_type' => 'int',
 
     // The default container which contains of action data
@@ -11,10 +11,10 @@ return [
     'payload' => Payload::class,
 
     'action' => [
-        // The default return type of actions without a model
+        // The default return type for actions without a model
         'return_type' => 'void',
 
-        // Make an action dto as a readonly (or not) class when an action creates the dto
+        // Make an action dto as a readonly class (or not) when an action creates a DTO
         'readonly_dto' => true,
     ],
 

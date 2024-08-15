@@ -17,7 +17,7 @@ trait HasPayload
     }
 
     /**
-     * Apply callable on a payload if the given value is truthy.
+     * Apply callable to a payload if the given value is truthy.
      */
     public function payloadWhen(callable $callable, mixed $value, Payload|string|null $payload = null): ActionWrapper|static
     {
@@ -29,7 +29,7 @@ trait HasPayload
     }
 
     /**
-     * Apply callable on a payload if the given value is falsy.
+     * Apply callable to a payload if the given value is falsy.
      */
     public function payloadUnless(callable $callable, mixed $value, Payload|string|null $payload = null): ActionWrapper|static
     {

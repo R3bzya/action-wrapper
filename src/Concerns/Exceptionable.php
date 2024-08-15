@@ -11,7 +11,7 @@ use Throwable;
 trait Exceptionable
 {
     /**
-     * Defines how to respond to a thrown exception.
+     * Defines how to handle to a thrown exception.
      */
     public function try(mixed $value): ActionWrapper|static
     {
@@ -25,7 +25,7 @@ trait Exceptionable
     }
 
     /**
-     * Returns false when an exception thrown.
+     * Returns false when an exception is thrown.
      */
     public function falseInsteadOfThrowable(): ActionWrapper|static
     {
@@ -57,7 +57,7 @@ trait Exceptionable
     }
 
     /**
-     * Throw an exception when an action result is false.
+     * Throw an exception when the result of an action is false.
      */
     public function throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static
     {

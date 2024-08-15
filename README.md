@@ -1,6 +1,8 @@
 # Action Wrapper
 
-ActionWrapper is a simple and flexible action decorator.
+## Introduction
+
+ActionWrapper is a simple and flexible way to decorate your actions.
 
 ## Installation
 
@@ -12,9 +14,9 @@ composer require r3bzya/action-wrapper
 
 ## Available classes
 
-When you need to wrap some actions, and you don't have to create a new action class
+When you need to wrap up some actions, and you don't want to create a new class for the action,
 use the `FluentAction` class.
-You can make a new instance with the `wrapper` function.
+You can create a new instance using the `wrapper` function.
 
 > ***Note:*** The FluentAction class has [extended methods](#extended-methods).
 >
@@ -23,7 +25,7 @@ You can make a new instance with the `wrapper` function.
 >
 >$action->execute(fn(): bool => true);
 >```
-The shortest way:
+>The shortest way:
 >```php
 >wrapper()->execute(fn(): bool => true);
 >```
@@ -32,7 +34,7 @@ The shortest way:
 
 ### Base methods
 
-> ***Note:*** These methods available in `Support\Traits\Simples\HasActionWrapper`.
+> ***Note:*** These methods available in `\R3bzya\ActionWrapper\Support\Traits\Simples\HasActionWrapper`.
 >
 >```php
 >class Example
@@ -43,21 +45,22 @@ The shortest way:
 >}
 >```
 
-#### *after(callable $decorator): ActionWrapper|static*
+#### *after()*
 
-The `after` method adds a callable function to an ActionWrapper which will be called after executing any of the `decoratedMethods`
-methods.
+The `after` method allows you to add a callable function to the ActionWrapper,
+which will be executed after any of the decorated methods have been called.
 
 ```php
 wrapper()->after(fn(mixed $result): mixed => $result);
 ```
 
-#### *before(callable $decorator): ActionWrapper|static*
+#### *before()*
 
-The `before` method adds a callable function to an ActionWrapper which will be called before executing any of
-the `decoratedMethods` methods.
-When the given callable function returns false, the action will be interrupted.
-To change the input arguments, the given callable should return an array otherwise the `before` method will work like a tap.
+The `before` method allows you to add a callable function to the ActionWrapper that will be executed before any of
+the decorated methods.
+If the given callable returns false, the action will stop executing.
+To modify the input arguments, the callable should return an array.
+Otherwise, the `before` method acts like a tap, executing the callable without changing the input.
 
 ```php
 wrapper()->before(fn(mixed $value): array => [$value]);
@@ -77,39 +80,23 @@ wrapper()->before(function (mixed $value): void {
 };
 ```
 
-#### *decoratedMethods(): array*
+#### *forgetActionWrapper()*
 
-The `decoratedMethods` method defines function names to be decorated. The default function name is `execute`.
-
-```php
-wrapper()->decoratedMethods();
-```
-
-#### *flushPipes(): ActionWrapper|static*
-
-The `flushPipes` method removes all pipes from the ActionWrapper instance.
-
-```php
-wrapper()->flushPipes();
-```
-
-#### *forgetActionWrapper(): ActionWrapper|static*
-
-The `forgetActionWrapper` method unsets the action wrapper from the action.
+The `forgetActionWrapper` method unsets the action wrapper from an action.
 
 ```php
 wrapper()->forgetActionWrapper();
 ```
 
-#### *getActionWrapper(): ActionWrapper|static*
+#### *getActionWrapper()*
 
-The `getActionWrapper` method returns a cached ActionsWrapper or makes and caches an ActionWrapper then return.
+The `getActionWrapper` method returns a cached ActionWrapper or creates and caches a new ActionWrapper, then returns.
 
 ```php
 wrapper()->getActionWrapper();
 ```
 
-#### *makeActionWrapper(): ActionWrapper|static*
+#### *makeActionWrapper()*
 
 The `makeActionWrapper` method creates a new ActionWrapper instance.
 
@@ -117,17 +104,17 @@ The `makeActionWrapper` method creates a new ActionWrapper instance.
 wrapper()->makeActionWrapper();
 ```
 
-#### *pipes(): array*
+#### *pipes()*
 
-The `pipes` method returns an array of pipes from ActionWrapper instance.
+The `pipes` method returns an array of pipes from the ActionWrapper instance.
 
 ```php
 wrapper()->pipes();
 ```
 
-#### *through(callable $decorator): ActionWrapper|static*
+#### *through()*
 
-The `through` method adds the callable decorator through which the action will be sent.
+The `through` method adds a callable decorator that the action will be sent through.
 
 ```php
 wrapper()->through(fn(array $arguments, \Closure $next): \Closure => $next($attributes));
@@ -135,7 +122,7 @@ wrapper()->through(fn(array $arguments, \Closure $next): \Closure => $next($attr
 
 ### Extended methods
 
-> ***Note:*** The next methods available in `Support\Traits\HasActionWrapper`.
+> ***Note:*** The next methods available in `\R3bzya\ActionWrapper\Support\Traits\HasActionWrapper`.
 >```php
 >class Example
 >{
@@ -145,17 +132,17 @@ wrapper()->through(fn(array $arguments, \Closure $next): \Closure => $next($attr
 >}
 >```
 
-#### *catch(): ActionWrapper|static*
+#### *catch()*
 
-The `catch` method returns an exception to respond without throwing an exception.
+The `catch` method returns an exception to handle without throwing an exception.
 
 ```php
 wrapper()->catch();
 ```
 
-#### *log(callable $callable, mixed $value = true): ActionWrapper|static*
+#### *log()*
 
-The `log` method the default method for logging action data.
+The `log` method is the default method for logging action data.
 Write the log if the given value is truthy.
 
 ```php
@@ -164,101 +151,96 @@ wrapper()->log(function (\R3bzya\ActionWrapper\Contracts\Support\Payloads\Payloa
 });
 ```
 
-#### *logArguments(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+#### *logArguments()*
 
-The `logArguments` method logs an arguments.
+The `logArguments` method logs the action arguments.
 
 ```php
 wrapper()->logArguments('logArguments');
 ```
 
-#### *logExceptions(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+#### *logExceptions()*
 
-The `logExceptions` method logs an exception if an exception was thrown.
+The `logExceptions` method logs an exception if an exception occurs.
 
 ```php
 wrapper()->logExceptions('logExceptions');
 ```
 
-#### *logIfNotDone(callable|\Stringable|string $message = null, mixed $value = true): ActionWrapper|static*
+#### *logIfNotDone()*
 
-The `logIfNotDone` method logs action data if the exception was thrown NotDoneException or the result is equal to false.
+The `logIfNotDone` method logs the action data if an exception was thrown NotDoneException, or if the result is false.
 
 ```php
 wrapper()->logIfNotDone('logIfNotDone');
 ```
 
-#### *logIfFailed(callable|\Stringable|string $message = null, mixed $value = true): ActionWrapper|static*
+#### *logIfFailed()*
 
-The `logIfFailed` method logs action data if the exception was thrown or the result is not present in payload.
+The `logIfFailed` method logs the action data if an exception was thrown or if the result is not present in the payload.
 
 ```php
 wrapper()->logIfFailed('logIfFailed');
 ```
 
-#### *logPerformance(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+#### *logPerformance()*
 
-The `logPerformance` method logs an action performance in milliseconds.
+The `logPerformance` method logs the performance of an action in milliseconds.
 
 ```php
 wrapper()->logPerformance('logPerformance');
 ```
 
-#### *logResult(string|\Stringable $message, mixed $value = true): ActionWrapper|static*
+#### *logResult()*
 
-The `logResult` method logs an action result. If the action thrown an exception, the result won't be logged.
+The `logResult` method logs the result of an action.
+If an exception is thrown during the action, the result will not be logged.
 
 ```php
 wrapper()->logResult('logResult');
 ```
 
-#### *payload(callable $callable, \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload|string|null $payload = null): ActionWrapper|static*
+#### *payload()*
 
-The `payload` method aggregates action data then set it in a payload.
-If you need to change a result, change it in the payload by setters.
+The `payload` method aggregates action data and sets it in a payload.
+If you need to change the result, you can change it in the payload using setters.
 
 ```php
-wrapper()->payload(function (
-    \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload,
-): void {
+wrapper()->payload(function (\R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload): void {
     //
 });
 ```
 
-#### *payloadWhen(callable $callable, mixed $value, \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload|string|null $payload = null): ActionWrapper|static*
+#### *payloadWhen()*
 
-The `payloadWhen` method applies the given callable on a payload if the given value is truthy.
+The `payloadWhen` method applies the given callable to a payload if the given value is truthy.
 
 ```php
-wrapper()->payloadWhen(function (
-    \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload,
-): void {
+wrapper()->payloadWhen(function (\R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload): void {
     //
 }, true);
 ```
 
-#### *payloadUnless(callable $callable, mixed $value, \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload|string|null $payload = null): ActionWrapper|static*
+#### *payloadUnless()*
 
-The `payloadUnless` method applies the given callable on a payload if the given value is falsy.
+The `payloadUnless` method applies the given callable to a payload if the given value is falsy.
 
 ```php
-wrapper()->payloadUnless(function (
-    \R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload,
-): void {
+wrapper()->payloadUnless(function (\R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload): void {
     //
 }, false);
 ```
 
-#### *retry(int $attempts): ActionWrapper|static*
+#### *retry()*
 
-The `retry` method retries the action while it has an exception.
+The `retry` method retries an action if it has an exception.
 
 ```php
 wrapper()->retry(1);
 ```
 
 
-#### *refreshModel(): ActionWrapper|static*
+#### *refreshModel()*
 
 The `refreshModel` method reloads the model instance with fresh attributes from the
 database. [see](https://laravel.com/docs/10.x/eloquent#refreshing-models)
@@ -267,17 +249,17 @@ database. [see](https://laravel.com/docs/10.x/eloquent#refreshing-models)
 wrapper()->refreshModel();
 ```
 
-#### *falseInsteadOfThrowable(): ActionWrapper|static*
+#### *falseInsteadOfThrowable()*
 
-The `falseInsteadOfThrowable` method returns false when an exception thrown.
+The `falseInsteadOfThrowable` method returns false when an exception is thrown.
 
 ```php
 wrapper()->falseInsteadOfThrowable();
 ```
 
-#### *tap(callable $decorator = null): ActionWrapper|static*
+#### *tap()*
 
-The `tap` method calls the given Closure with the action result then return the action result.
+The `tap` method calls the given Closure with the action result then returns the action result.
 
 ```php
 wrapper()->tap(function (mixed $result): void {
@@ -285,9 +267,9 @@ wrapper()->tap(function (mixed $result): void {
 });
 ```
 
-#### *tapWhen(mixed $value, callable $decorator = null): ActionWrapper|static*
+#### *tapWhen()*
 
-The `tapWhen` method calls the given Closure if the given value is truthy then return the action result.
+The `tapWhen` method calls the given Closure if the given value is truthy then returns the action result.
 
 ```php
 wrapper()->tapWhen(true, function (mixed $result): void {
@@ -295,9 +277,9 @@ wrapper()->tapWhen(true, function (mixed $result): void {
 });
 ```
 
-#### *tapUnless(mixed $value, callable $callable = null): ActionWrapper|static*
+#### *tapUnless()*
 
-The `tapUnless` method calls the given Closure if the given value is falsy then return the action result.
+The `tapUnless` method calls the given Closure if the given value is falsy then returns the action result.
 
 ```php
 wrapper()->tapUnless(false, function (mixed $result): void {
@@ -305,17 +287,17 @@ wrapper()->tapUnless(false, function (mixed $result): void {
 });
 ```
 
-#### *throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static*
+#### *throwIfNotDone()*
 
-The `throwIfNotDone` method will throw the given exception when the action result is false.
+The `throwIfNotDone` method will throw the given exception if the action's result is false.
 
 ```php
 wrapper()->throwIfNotDone();
 ```
 
-#### *throwUnless(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static*
+#### *throwUnless()*
 
-The `throwUnless` method will throw the given exception if the given value evaluates to false.
+The `throwUnless` method throws the given exception if the given value evaluates to false.
 
 ```php
 wrapper()->throwUnless(false);
@@ -325,9 +307,9 @@ wrapper()->throwUnless(false);
 wrapper()->throwUnless(fn(mixed $result): mixed => false);
 ```
 
-#### *throwWhen(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static*
+#### *throwWhen()*
 
-The `throwWhen` method will throw the given exception if the given value evaluates to true.
+The `throwWhen` method throws the given exception if the given value evaluates to true.
 
 ```php
 wrapper()->throwWhen(true);
@@ -337,19 +319,20 @@ wrapper()->throwWhen(true);
 wrapper()->throwWhen(fn(mixed $result): mixed => true);
 ```
 
-#### *transaction(int $attempts = 1): ActionWrapper|static*
+#### *transaction()*
 
-The `transaction` method begins a new database transaction with try/catch,
-if the code does not throw an exception the transaction will be committed,
-else the transaction will be rolled back. [see](https://laravel.com/docs/10.x/database#database-transactions)
+The `transaction` method begins a new database transaction using try/catch,
+if the code does not throw an exception the transaction is committed,
+otherwise the transaction will be rolled back.
+[see](https://laravel.com/docs/10.x/database#database-transactions)
 
 ```php
 wrapper()->transaction();
 ```
 
-#### *try(mixed $value): ActionWrapper|static*
+#### *try()*
 
-The `try` method defines how to respond to a thrown exception.
+The `try` method defines how to handle an exception that is thrown.
 
 ```php
 wrapper()->try(false);
@@ -357,10 +340,10 @@ wrapper()->try(fn() => false);
 wrapper()->try(fn(Throwable $e) => $e);
 ```
 
-#### *unless(mixed $value, callable $callable): ActionWrapper|static*
+#### *unless()*
 
 The `unless` method executes the given callback if the given value is falsy,
-or the action result will be return.
+or returns the action's result.
 
 ```php
 wrapper()->unless(fn(mixed $result): mixed => false, fn(): mixed => false);
@@ -370,7 +353,7 @@ wrapper()->unless(fn(mixed $result): mixed => false, fn(): mixed => false);
 wrapper()->unless(false, fn(mixed $result): mixed => $result);
 ```
 
-#### *unsetModelRelations(): ActionWrapper|static*
+#### *unsetModelRelations()*
 
 The `unsetModelRelations` method unsets all the loaded relations from the
 model. [see](https://laravel.com/api/10.x/Illuminate/Database/Eloquent/Concerns/HasRelationships.html#method_unsetRelations)
@@ -379,10 +362,10 @@ model. [see](https://laravel.com/api/10.x/Illuminate/Database/Eloquent/Concerns/
 wrapper()->unsetModelRelations();
 ```
 
-#### *when(mixed $value, callable $callable): ActionWrapper|static*
+#### *when()*
 
 The `when` method executes the given callable if the given value is truthy,
-or the action result will be return.
+or returns the action's result.
 
 ```php
 wrapper()->when(fn(mixed $result): mixed => true, fn(): mixed => true);
@@ -394,10 +377,10 @@ wrapper()->when(true, fn(mixed $result): mixed => $result);
 
 ## Artisan commands
 
-The `make:action` command makes the action class.
-The command will try to guess the base action on the model to use the template.
-Also, you don't have to specify the model,
-use the name 'CreateUser' or 'CreateUserAction' with the option `-m` and watch the magic.
+The `make:action` command makes an action class.
+The command tries to guess the action from the model and uses the template.
+Also, you don't need to specify the model,
+use the name 'CreateUser' or 'CreateUserAction' with the option `-m` and watch the magic happen.
 If the model has a directory (e.g. 'User'), you will use the name 'User/CreateUser' or 'User/CreateUserAction'.
 
 #### make:action
@@ -406,7 +389,7 @@ If the model has a directory (e.g. 'User'), you will use the name 'User/CreateUs
 php artisan make:action FooAction
 ```
 
-You can use the option `-d` to create DTO.
+You can use the option `-d` to create a DTO.
 
 ```shell
 php artisan make:action FooAction -d

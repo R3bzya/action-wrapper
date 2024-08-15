@@ -219,7 +219,7 @@ class Payload implements PayloadContract
     public function validated(): static
     {
         if (! $this->validate()) {
-            throw new RuntimeException('The payload is invalid');
+            throw new RuntimeException('The payload is invalid.');
         }
 
         return $this;

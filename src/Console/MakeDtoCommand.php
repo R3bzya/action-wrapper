@@ -49,8 +49,8 @@ class MakeDtoCommand extends GeneratorCommand
     protected function getOptions(): array
     {
         return [
-            ['readonly', 'r', InputOption::VALUE_NONE, 'Create the readonly class'],
-            ['force', 'f', InputOption::VALUE_NONE, 'Create the class even if the dto already exists'],
+            ['readonly', 'r', InputOption::VALUE_NONE, 'Create a readonly class'],
+            ['force', 'f', InputOption::VALUE_NONE, 'Create a class even if a DTO already exists'],
         ];
     }
 

@@ -49,12 +49,12 @@ class MakeActionCommand extends GeneratorCommand
     protected function getOptions(): array
     {
         return [
-            ['all', null, InputOption::VALUE_NONE, 'Generate the new wrapped action class with dto'],
-            ['readonly', 'r', InputOption::VALUE_NONE, 'Create the readonly action class'],
-            ['wrapper', 'w', InputOption::VALUE_NONE, 'Create the new wrapped action class'],
-            ['dto', 'd', InputOption::VALUE_OPTIONAL, 'Create a new dto for the action class'],
-            ['model', 'm', InputOption::VALUE_OPTIONAL, 'Create the new wrapped action class with a model', false],
-            ['force', 'f', InputOption::VALUE_NONE, 'Create the class even if the action class already exists'],
+            ['all', null, InputOption::VALUE_NONE, 'Generate a new wrapped action class with DTO'],
+            ['readonly', 'r', InputOption::VALUE_NONE, 'Create a readonly action class'],
+            ['wrapper', 'w', InputOption::VALUE_NONE, 'Create a new wrapped action class'],
+            ['dto', 'd', InputOption::VALUE_OPTIONAL, 'Create a new DTO for an action class'],
+            ['model', 'm', InputOption::VALUE_OPTIONAL, 'Create a new wrapped action class with a model', false],
+            ['force', 'f', InputOption::VALUE_NONE, 'Create a class even if an action class already exists'],
         ];
     }
 
