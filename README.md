@@ -122,7 +122,8 @@ wrapper()->through(fn(array $arguments, \Closure $next): \Closure => $next($attr
 
 ### Extended methods
 
-> ***Note:*** The next methods available in `\R3bzya\ActionWrapper\Support\Traits\HasActionWrapper`.
+> ***Note:*** The next methods available in `\R3bzya\ActionWrapper\Support\Traits\HasActionWrapper`
+> or you can extend the `\R3bzya\ActionWrapper\Support` class.
 >```php
 >class Example
 >{

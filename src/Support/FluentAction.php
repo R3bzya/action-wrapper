@@ -2,15 +2,10 @@
 
 namespace R3bzya\ActionWrapper\Support;
 
-use Closure;
-use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;
-
-class FluentAction
+class FluentAction extends Action
 {
-    use HasActionWrapper;
-
     public function execute(mixed $value, mixed ...$args): mixed
     {
-        return $value instanceof Closure ? $value(...$args) : $value;
+        return value($value, ...$args);
     }
 }
