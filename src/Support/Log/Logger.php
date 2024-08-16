@@ -54,43 +54,116 @@ class Logger implements LoggerInterface
         $this->write('log', $message, $context);
     }
 
-    private function write(string $level, mixed $message, mixed $context): void
+    protected function write(string $level, mixed $message, mixed $context): void
     {
-        [$file, $message] = $this->parseMessage($message);
+        // Get channels and the log message
+        [$channels, $message] = $this->parseMessage($message);
 
-        $this->channel($file)->$level($message, $context);
+        LogFacade::stack($this->getStack($channels))->$level($message, $context);
     }
 
-    private function parseMessage(string $message): array
+    protected function getStack(string|null $channels): array
     {
-        if (str_contains($message, ':')) {
-            return explode(':', $message, 2);
+        if ($channels && $channels = $this->prepareChannels($channels)) {
+            return $channels;
         }
 
-        return [null, $message];
+        return [$this->channel(null)];
     }
 
-    private function channel(string|null $file): LoggerInterface
+    protected function parseMessage(string $message): array
+    {
+        if (! str_contains($message, ':')) {
+            return [null, $message];
+        }
+
+        return explode(':', $message, 2);
+    }
+
+    protected function prepareChannels(string $channels): array
+    {
+        // Find an on-demand channel and other channels
+        $channels = $this->replacePlaceholders(
+            $this->parseChannels(
+                $this->setPlaceholders($channels),
+            )
+        );
+
+        return collect(array_filter_recursive($channels))
+            ->flatMap(function (string|array $value) {
+                return is_array($value) ? $value : [$this->channel($value)];
+            })
+            ->unique()
+            ->values()
+            ->all();
+    }
+
+    protected function parseChannels(string $channels): array
+    {
+        $channels = $this->trimChannels($channels);
+
+        if (! str_contains($channels, ',')) {
+            return [$channels, []];
+        }
+
+        $channels = explode(',', $channels);
+
+        return [array_shift($channels), $channels];
+    }
+
+    protected function trimChannels(string $channels): string
+    {
+        return rtrim(trim($channels), ',');
+    }
+
+    protected function channel(string|null $file): LoggerInterface
     {
         $config = config('action-wrapper.logging.config', []);
 
+        // If we want to save the logs to a specific file, we need to create a file path.
         $config['path'] = $this->preparePath(
-            $config['path'] ?? storage_path('logs'), $file
+            $config['path'] ?? storage_path('logs'), $file,
         );
 
         return LogFacade::build($config);
     }
 
-    private function preparePath(string $path, string|null $file): string
+    protected function preparePath(string $path, string|null $file): string
     {
+        // If the file name is null and the path ends with ".log",
+        // the path is a complete path and should be returned.
         if (Str::endsWith($path, '.log') && is_null($file)) {
             return $path;
         }
 
-        $file = ltrim(str_replace('.', '/', $file ?: 'actions'), '\/');
-
+        // If the path ends with ".log", we need to remove that part before concatenating.
         $path = Str::replaceMatches('/\/(\w+).log$/', '', $path);
 
-        return sprintf('%s/%s.log', $path, $file);
+        $file = is_string($file) ? trim($file, '\\/') : null;
+
+        return sprintf('%s/%s.log', $path, $file ?: 'actions');
+    }
+
+    protected function setPlaceholders(string $value): string
+    {
+        return str_replace(['\\,'], ['__comma__'], $value);
+    }
+
+    protected function replacePlaceholders(array $data): array
+    {
+        $result = [];
+
+        foreach ($data as $key => $datum) {
+            $result[$key] = is_array($datum)
+                ? $this->replacePlaceholders($datum)
+                : $this->replacePlaceholdersInString($datum);
+        }
+
+        return $result;
+    }
+
+    protected function replacePlaceholdersInString(string $value): string
+    {
+        return str_replace(['__comma__'], [','], $value);
     }
 }

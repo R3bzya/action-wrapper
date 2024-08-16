@@ -146,9 +146,11 @@ wrapper()->catch();
 The `log` method is the default method for logging action data.
 Write the log if the given value is truthy.
 
+> ***Note:*** You can use a custom logger to safe logs to a specific file and other channels.
+
 ```php
 wrapper()->log(function (\R3bzya\ActionWrapper\Contracts\Support\Payloads\Payload $payload) {
-    \Illuminate\Support\Facades\Log::info('Payload data', $payload->toArray());
+    \R3bzya\ActionWrapper\Support\Facades\Log::info('README.md,stack:Payload data', $payload->all());
 });
 ```
 

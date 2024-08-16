@@ -15,7 +15,7 @@ class LoggableTest extends TestCase
     {
         parent::setUp();
 
-        Log::shouldReceive('build')
+        Log::shouldReceive('build', 'stack')
             ->andReturnSelf();
     }
 
