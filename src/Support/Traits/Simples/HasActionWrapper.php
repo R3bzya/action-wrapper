@@ -6,11 +6,23 @@ use Closure;
 use Illuminate\Support\Traits\Macroable;
 use R3bzya\ActionWrapper\ActionWrapper;
 
+/**
+ * @mixin ActionWrapper
+ */
 trait HasActionWrapper
 {
-    use Macroable;
+    use Macroable {
+        Macroable::__call as macroCall;
+    }
 
     protected ActionWrapper $actionWrapper;
+
+    public function __call(string $name, array $arguments)
+    {
+        return method_exists($this->getActionWrapper(), $name) && ! static::hasMacro($name)
+            ? $this->getActionWrapper()->$name(...$arguments)
+            : $this->macroCall($name, $arguments);
+    }
 
     /**
      * The function names which should be decorated.
@@ -36,14 +48,6 @@ trait HasActionWrapper
     public function getActionWrapper(): ActionWrapper|static
     {
         return $this->actionWrapper ?? $this->actionWrapper = $this->makeActionWrapper();
-    }
-
-    /**
-     * Add the callback through which the action will be sent.
-     */
-    public function through(callable $decorator): ActionWrapper|static
-    {
-        return $this->getActionWrapper()->through($decorator);
     }
 
     /**

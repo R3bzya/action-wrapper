@@ -5,6 +5,7 @@ namespace R3bzya\ActionWrapper\Tests\Support\Traits\Simples;
 use Closure;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use R3bzya\ActionWrapper\ActionWrapper;
 use R3bzya\ActionWrapper\Support\FluentAction;
 
 class HasActionWrapperTest extends TestCase
@@ -126,13 +127,20 @@ class HasActionWrapperTest extends TestCase
 
     public function testFlushPipes(): void
     {
+        $this->assertEmpty(wrapper()->pipes());
+        $this->assertInstanceOf(ActionWrapper::class, wrapper()->flushPipes());
+
         $wrapper = wrapper()
-            ->after(fn(int $value) => $value);
+            ->through(fn(array $arguments, Closure $next) => $next($arguments) + 5);
 
         $this->assertCount(1, $wrapper->pipes());
 
+        $this->assertSame(10, $wrapper->execute(5));
+
         $wrapper->flushPipes();
 
-        $this->assertCount(0, $wrapper->pipes());
+        $this->assertEmpty($wrapper->pipes());
+
+        $this->assertSame(5, $wrapper->execute(5));
     }
 }
