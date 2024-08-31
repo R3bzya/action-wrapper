@@ -12,7 +12,6 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use function Laravel\Prompts\multiselect;
 
 #[AsCommand(name: 'make:action')]
@@ -41,6 +40,10 @@ class MakeActionCommand extends GeneratorCommand
 
         if ($this->option('dto') !== false) {
             $this->createDto();
+        }
+
+        if ($this->option('model') !== false) {
+            $this->createModel();
         }
 
         return static::SUCCESS;
@@ -257,5 +260,13 @@ class MakeActionCommand extends GeneratorCommand
         }
 
         return null;
+    }
+
+    protected function createModel(): void
+    {
+        $this->call('make:model', [
+            'name' => $this->getNamespacedModel(),
+            '--migration' => true,
+        ]);
     }
 }

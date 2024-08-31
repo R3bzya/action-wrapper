@@ -10,6 +10,8 @@ class MakeActionCommandTest extends GeneratorTestCase
     protected array $files = [
         'app/Actions/*',
         'app/Dto/Actions/*',
+        'app/Models/*',
+        'database/migrations/*'
     ];
 
     public function testCanCreateAction(): void
@@ -77,6 +79,8 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/UpdateFoo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/UpdateFooDto.php');
+
+        $this->assertFilenameExists('app/Models/Foo.php');
     }
 
     public function testCanCreateActionDtoWithCustomReturn(): void
@@ -207,6 +211,8 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/CreateFoo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/CreateFooDto.php');
+
+        $this->assertFilenameExists('app/Models/Foo.php');
     }
 
     public function testCanCreateActionUpdate(): void
@@ -231,6 +237,8 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/UpdateFoo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/UpdateFooDto.php');
+
+        $this->assertFilenameExists('app/Models/Foo.php');
     }
 
     public function testCanCreateActionDestroy(): void
@@ -255,6 +263,8 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/DestroyFoo.php');
 
         $this->assertFilenameDoesNotExists('app/Dto/Actions/DestroyFooDto.php');
+
+        $this->assertFilenameExists('app/Models/Foo.php');
     }
 
     public function testCanCreateActionDestroyDto(): void
@@ -279,6 +289,8 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/DestroyFoo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/DestroyFooDto.php');
+
+        $this->assertFilenameExists('app/Models/Foo.php');
     }
 
     public function testCanCreateWithCustomModel(): void
@@ -303,5 +315,7 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/DestroyFoo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/DestroyFooDto.php');
+
+        $this->assertFilenameExists('app/Models/Bar.php');
     }
 }
