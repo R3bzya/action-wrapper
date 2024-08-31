@@ -71,7 +71,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class UpdateFoo',
             'public function execute(string $id, UpdateFooDto $updateFooDto): bool',
-            'return Foo::findOrFail($id)->update($updateFooDto->toArray());'
+            'return Foo::findOrFail($id)->update($updateFooDto->all());'
         ], 'app/Actions/UpdateFoo.php');
 
         $this->assertFileDoesNotContains([
@@ -203,7 +203,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class CreateFoo',
             'public function execute(CreateFooDto $createFooDto): Foo',
-            'return Foo::create($createFooDto->toArray());',
+            'return Foo::create($createFooDto->all());',
         ], 'app/Actions/CreateFoo.php');
 
         $this->assertFileDoesNotContains([
@@ -229,7 +229,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class UpdateFoo',
             'public function execute(int $id, UpdateFooDto $updateFooDto): bool',
-            'return Foo::findOrFail($id)->update($updateFooDto->toArray())',
+            'return Foo::findOrFail($id)->update($updateFooDto->all())',
         ], 'app/Actions/UpdateFoo.php');
 
         $this->assertFileDoesNotContains([
@@ -281,7 +281,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class DestroyFoo',
             'public function execute(DestroyFooDto $destroyFooDto): bool',
-            'return (bool) Foo::destroy($destroyFooDto->toArray())',
+            'return (bool) Foo::destroy($destroyFooDto->all())',
         ], 'app/Actions/DestroyFoo.php');
 
         $this->assertFileDoesNotContains([
@@ -307,7 +307,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class DestroyFoo',
             'public function execute(DestroyFooDto $destroyFooDto): bool',
-            'return (bool) Bar::destroy($destroyFooDto->toArray())',
+            'return (bool) Bar::destroy($destroyFooDto->all())',
         ], 'app/Actions/DestroyFoo.php');
 
         $this->assertFileDoesNotContains([

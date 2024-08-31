@@ -12,6 +12,6 @@ use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;
 
     public function execute({{ modelKeyType }} $id, {{ dtoClass }} ${{ dtoVariable }}): bool
     {
-        return {{ model }}::findOrFail($id)->update(${{ dtoVariable }}->toArray());
+        return {{ model }}::findOrFail($id)->update(${{ dtoVariable }}->all());
     }
 }

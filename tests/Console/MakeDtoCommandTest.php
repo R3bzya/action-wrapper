@@ -18,12 +18,12 @@ class MakeDtoCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Dto\Actions;',
-            'use Illuminate\Contracts\Support\Arrayable;',
-            'class Foo implements Arrayable',
+            'class Foo',
+            'public function all(): array',
         ], 'app/Dto/Actions/Foo.php');
 
         $this->assertFileDoesNotContains([
-            'readonly class Foo implements Arrayable',
+            'readonly class Foo',
         ], 'app/Dto/Actions/Foo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/Foo.php');
@@ -38,8 +38,8 @@ class MakeDtoCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Dto\Actions;',
-            'use Illuminate\Contracts\Support\Arrayable;',
-            'readonly class Foo implements Arrayable',
+            'readonly class Foo',
+            'public function all(): array',
         ], 'app/Dto/Actions/Foo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/Foo.php');

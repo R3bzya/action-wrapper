@@ -12,6 +12,6 @@ use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;
 
     public function execute({{ dtoClass }} ${{ dtoVariable }}): bool
     {
-        return (bool) {{ model }}::destroy(${{ dtoVariable }}->toArray());
+        return (bool) {{ model }}::destroy(${{ dtoVariable }}->all());
     }
 }

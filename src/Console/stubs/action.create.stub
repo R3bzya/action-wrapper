@@ -12,6 +12,6 @@ use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;
 
     public function execute({{ dtoClass }} ${{ dtoVariable }}): {{ type }}
     {
-        return {{ model }}::create(${{ dtoVariable }}->toArray());
+        return {{ model }}::create(${{ dtoVariable }}->all());
     }
 }

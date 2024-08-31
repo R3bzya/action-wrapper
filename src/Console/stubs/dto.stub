@@ -2,14 +2,12 @@
 
 namespace {{ namespace }};
 
-use Illuminate\Contracts\Support\Arrayable;
-
-{{ classReadonly }} {{ class }} implements Arrayable
+{{ classReadonly }} {{ class }}
 {
     public function __construct() {}
 
-    public function toArray(): array
+    public function all(): array
     {
-        // TODO: Implement toArray() method.
+        // TODO: Implement all() method.
     }
 }
