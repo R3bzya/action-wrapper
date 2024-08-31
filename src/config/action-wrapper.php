@@ -18,6 +18,10 @@ return [
         'readonly_dto' => true,
     ],
 
+    'dto' => [
+        'path' => 'Dto\Actions'
+    ],
+
     'logging' => [
         'config' => [
             'driver' => 'daily',

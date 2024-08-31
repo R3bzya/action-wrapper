@@ -9,7 +9,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 {
     protected array $files = [
         'app/Actions/*',
-        'app/Dto/*',
+        'app/Dto/Actions/*',
     ];
 
     public function testCanCreateAction(): void
@@ -26,11 +26,11 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/Foo.php');
 
         $this->assertFileDoesNotContains([
-            'use App\Dto\FooDto;',
+            'use App\Dto\Actions\FooDto;',
             'readonly class Foo',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameDoesNotExists('app/Dto/FooDto.php');
+        $this->assertFilenameDoesNotExists('app/Dto/Actions/FooDto.php');
     }
 
     public function testCanCreateActionDto(): void
@@ -41,7 +41,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\FooDto;',
+            'use App\Dto\Actions\FooDto;',
             'class Foo',
             'public function execute(FooDto $fooDto): void',
         ], 'app/Actions/Foo.php');
@@ -50,7 +50,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class Foo',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameExists('app/Dto/FooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/FooDto.php');
     }
 
     public function testCanCreateActionDtoWithCustomModelKeyType(): void
@@ -64,7 +64,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\UpdateFooDto;',
+            'use App\Dto\Actions\UpdateFooDto;',
             'use App\Models\Foo;',
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class UpdateFoo',
@@ -76,7 +76,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class UpdateFoo',
         ], 'app/Actions/UpdateFoo.php');
 
-        $this->assertFilenameExists('app/Dto/UpdateFooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/UpdateFooDto.php');
     }
 
     public function testCanCreateActionDtoWithCustomReturn(): void
@@ -89,7 +89,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\FooDto;',
+            'use App\Dto\Actions\FooDto;',
             'class Foo',
             'public function execute(FooDto $fooDto): bool',
         ], 'app/Actions/Foo.php');
@@ -98,7 +98,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class Foo',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameExists('app/Dto/FooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/FooDto.php');
     }
 
     public function testCanReplaceReadonly(): void
@@ -110,12 +110,12 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\FooDto;',
+            'use App\Dto\Actions\FooDto;',
             'readonly class Foo',
             'public function execute(FooDto $fooDto): void',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameExists('app/Dto/FooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/FooDto.php');
     }
 
     public function testCanCreateWithCustomDtoName(): void
@@ -127,7 +127,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\BarDto',
+            'use App\Dto\Actions\BarDto',
             'class Foo',
             'public function execute(BarDto $barDto): void',
         ], 'app/Actions/Foo.php');
@@ -136,7 +136,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class Foo',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameExists('app/Dto/BarDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/BarDto.php');
     }
 
     public function testCanCreateActionWrapped(): void
@@ -155,11 +155,11 @@ class MakeActionCommandTest extends GeneratorTestCase
         ], 'app/Actions/Foo.php');
 
         $this->assertFileDoesNotContains([
-            'use App\Dto\FooDto;',
+            'use App\Dto\Actions\FooDto;',
             'readonly class Foo',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameDoesNotExists('app/Dto/FooDto.php');
+        $this->assertFilenameDoesNotExists('app/Dto/Actions/FooDto.php');
     }
 
     public function testCanCreateActionWrappedDto(): void
@@ -173,7 +173,7 @@ class MakeActionCommandTest extends GeneratorTestCase
         $this->assertFileContains([
             'namespace App\Actions;',
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
-            'use App\Dto\FooDto;',
+            'use App\Dto\Actions\FooDto;',
             'class Foo',
             'public function execute(FooDto $fooDto): void',
         ], 'app/Actions/Foo.php');
@@ -182,7 +182,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class Foo',
         ], 'app/Actions/Foo.php');
 
-        $this->assertFilenameExists('app/Dto/FooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/FooDto.php');
     }
 
     public function testCanCreateActionCreate(): void
@@ -194,7 +194,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\CreateFooDto;',
+            'use App\Dto\Actions\CreateFooDto;',
             'use App\Models\Foo;',
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class CreateFoo',
@@ -206,7 +206,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class CreateFoo',
         ], 'app/Actions/CreateFoo.php');
 
-        $this->assertFilenameExists('app/Dto/CreateFooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/CreateFooDto.php');
     }
 
     public function testCanCreateActionUpdate(): void
@@ -218,7 +218,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\UpdateFooDto;',
+            'use App\Dto\Actions\UpdateFooDto;',
             'use App\Models\Foo;',
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class UpdateFoo',
@@ -230,7 +230,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class UpdateFoo',
         ], 'app/Actions/UpdateFoo.php');
 
-        $this->assertFilenameExists('app/Dto/UpdateFooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/UpdateFooDto.php');
     }
 
     public function testCanCreateActionDestroy(): void
@@ -254,7 +254,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class DestroyFoo',
         ], 'app/Actions/DestroyFoo.php');
 
-        $this->assertFilenameDoesNotExists('app/Dto/DestroyFooDto.php');
+        $this->assertFilenameDoesNotExists('app/Dto/Actions/DestroyFooDto.php');
     }
 
     public function testCanCreateActionDestroyDto(): void
@@ -266,7 +266,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\DestroyFooDto;',
+            'use App\Dto\Actions\DestroyFooDto;',
             'use App\Models\Foo;',
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class DestroyFoo',
@@ -278,7 +278,7 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class DestroyFoo',
         ], 'app/Actions/DestroyFoo.php');
 
-        $this->assertFilenameExists('app/Dto/DestroyFooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/DestroyFooDto.php');
     }
 
     public function testCanCreateWithCustomModel(): void
@@ -290,7 +290,7 @@ class MakeActionCommandTest extends GeneratorTestCase
 
         $this->assertFileContains([
             'namespace App\Actions;',
-            'use App\Dto\DestroyFooDto;',
+            'use App\Dto\Actions\DestroyFooDto;',
             'use App\Models\Bar;',
             'use R3bzya\ActionWrapper\Support\Traits\HasActionWrapper;',
             'class DestroyFoo',
@@ -302,6 +302,6 @@ class MakeActionCommandTest extends GeneratorTestCase
             'readonly class DestroyFoo',
         ], 'app/Actions/DestroyFoo.php');
 
-        $this->assertFilenameExists('app/Dto/DestroyFooDto.php');
+        $this->assertFilenameExists('app/Dto/Actions/DestroyFooDto.php');
     }
 }

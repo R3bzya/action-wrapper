@@ -8,7 +8,6 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use function Laravel\Prompts\confirm;
 
 #[AsCommand(name: 'make:dto')]
@@ -43,7 +42,7 @@ class MakeDtoCommand extends GeneratorCommand
 
     public static function path(): string
     {
-        return 'Dto';
+        return config('action-wrapper.dto.path');
     }
 
     protected function getOptions(): array

@@ -210,7 +210,7 @@ class MakeActionCommand extends GeneratorCommand
             'dto' => 'Action Dto',
             'wrapper' => 'Action Wrapper',
             'readonly' => 'Readonly Class',
-        ]))->each(fn ($option) => $input->setOption($option, true));
+        ]))->each(fn($option) => $input->setOption($option, true));
     }
 
     protected function getNamespacedDto(): ?string
