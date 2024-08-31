@@ -2,6 +2,7 @@
 
 namespace R3bzya\ActionWrapper\Support\Traits;
 
+use R3bzya\ActionWrapper\Concerns\CanIterate;
 use R3bzya\ActionWrapper\Concerns\Conditionable;
 use R3bzya\ActionWrapper\Concerns\Exceptionable;
 use R3bzya\ActionWrapper\Concerns\HasPayload;
@@ -15,6 +16,7 @@ use R3bzya\ActionWrapper\Support\Traits\Simples\HasActionWrapper as HasSimpleAct
 trait HasActionWrapper
 {
     use HasSimpleActionWrapper,
+        CanIterate,
         Conditionable,
         Exceptionable,
         HasPayload,

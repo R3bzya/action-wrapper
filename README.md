@@ -141,6 +141,16 @@ The `catch` method returns an exception to handle without throwing an exception.
 wrapper()->catch();
 ```
 
+### *each()*
+
+The `each` method runs each element of the array through an action method by default 'execute'.
+You can use closure when you need to send multiple elements of a function.
+
+```php
+wrapper()->each([1, 2, 3]);
+wrapper()->each([fn() => [1, 2, 3], fn() => [4, 5]]);
+```
+
 #### *log()*
 
 The `log` method is the default method for logging action data.
