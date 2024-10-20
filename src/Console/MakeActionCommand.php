@@ -124,7 +124,7 @@ class MakeActionCommand extends GeneratorCommand
     {
         $class = class_basename($name);
 
-        $dtoVariable = lcfirst($class);
+        $dtoVariable = $this->getDtoVariable($class);
 
         $replace = [
             'DummyDtoNamespace' => $name,
@@ -150,6 +150,11 @@ class MakeActionCommand extends GeneratorCommand
             "use $name;",
             $stub,
         );
+    }
+
+    protected function getDtoVariable(string $class): string
+    {
+        return config('action-wrapper.action.dto_variable_placeholder') ?: lcfirst($class);
     }
 
     protected function replaceModel(string $stub, string $name): string

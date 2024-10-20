@@ -16,10 +16,12 @@ return [
 
         // Make an action dto as a readonly class (or not) when an action creates a DTO
         'readonly_dto' => true,
+
+        'dto_variable_placeholder' => null,
     ],
 
     'dto' => [
-        'path' => 'Dto\Actions'
+        'path' => 'Dto\Actions',
     ],
 
     'logging' => [
