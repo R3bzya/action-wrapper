@@ -133,12 +133,12 @@ wrapper()->through(fn(array $arguments, \Closure $next): \Closure => $next($attr
 >}
 >```
 
-#### *catch()*
+#### *throwableInsteadOfThrow()*
 
-The `catch` method returns an exception to handle without throwing an exception.
+The `throwableInsteadOfThrow` method returns an exception without throwing.
 
 ```php
-wrapper()->catch();
+wrapper()->throwableInsteadOfThrow();
 ```
 
 ### *each()*
@@ -343,14 +343,14 @@ otherwise the transaction will be rolled back.
 wrapper()->transaction();
 ```
 
-#### *try()*
+#### *catch()*
 
-The `try` method defines how to handle an exception that is thrown.
+The `catch` method defines how to handle an exception that is thrown.
 
 ```php
-wrapper()->try(false);
-wrapper()->try(fn() => false);
-wrapper()->try(fn(Throwable $e) => $e);
+wrapper()->catch(false);
+wrapper()->catch(fn() => false);
+wrapper()->catch(fn(Throwable $e) => $e);
 ```
 
 #### *unless()*

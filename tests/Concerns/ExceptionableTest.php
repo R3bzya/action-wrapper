@@ -36,23 +36,23 @@ class ExceptionableTest extends TestCase
             ->execute(false);
     }
 
-    public function testTry(): void
+    public function testCatch(): void
     {
         $this->assertFalse(
             wrapper()
-                ->try(false)
+                ->catch(false)
                 ->execute(fn() => throw new RuntimeException),
         );
 
         $this->assertFalse(
             wrapper()
-                ->try(fn() => false)
+                ->catch(fn() => false)
                 ->execute(fn() => throw new RuntimeException),
         );
 
         $this->assertFalse(
             wrapper()
-                ->try(function (Throwable $e) {
+                ->catch(function (Throwable $e) {
                     $this->assertInstanceOf(RuntimeException::class, $e);
 
                     return false;
@@ -61,12 +61,12 @@ class ExceptionableTest extends TestCase
         );
     }
 
-    public function testCatch(): void
+    public function testThrowableInsteadOfThrow(): void
     {
         $this->assertInstanceOf(
             RuntimeException::class,
             wrapper()
-                ->catch()
+                ->throwableInsteadOfThrow()
                 ->execute(fn() => throw new RuntimeException),
         );
     }

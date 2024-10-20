@@ -13,7 +13,7 @@ trait Exceptionable
     /**
      * Defines how to handle to a thrown exception.
      */
-    public function try(mixed $value): ActionWrapper|static
+    public function catch(mixed $value): ActionWrapper|static
     {
         return $this->through(function (array $arguments, Closure $next) use ($value) {
             try {
@@ -29,15 +29,15 @@ trait Exceptionable
      */
     public function falseInsteadOfThrowable(): ActionWrapper|static
     {
-        return $this->try(false);
+        return $this->catch(false);
     }
 
     /**
      * Returns an exception to respond without throwing an exception.
      */
-    public function catch(): ActionWrapper|static
+    public function throwableInsteadOfThrow(): ActionWrapper|static
     {
-        return $this->try(fn(Throwable $e) => $e);
+        return $this->catch(fn(Throwable $e) => $e);
     }
 
     /**
