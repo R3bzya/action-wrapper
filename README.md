@@ -133,6 +133,22 @@ wrapper()->through(fn(array $arguments, \Closure $next): \Closure => $next($attr
 >}
 >```
 
+#### *abortIf()*
+
+The `abortIf` method throws an HttpException with the given data if the result is true.
+
+```php
+wrapper()->abortIf();
+```
+
+#### *abortUnless()*
+
+The `abortUnless` method throws an HttpException with the given data unless the result is true.
+
+```php
+wrapper()->abortUnless();
+```
+
 #### *throwableInsteadOfThrow()*
 
 The `throwableInsteadOfThrow` method returns an exception without throwing.
@@ -300,9 +316,17 @@ wrapper()->tapUnless(false, function (mixed $result): void {
 });
 ```
 
+#### *throwIf()*
+
+The `throwIf` method throws the given exception if the result is true.
+
+```php
+wrapper()->throwIf();
+```
+
 #### *throwIfNotDone()*
 
-The `throwIfNotDone` method will throw the given exception if the action's result is false.
+The `throwIfNotDone` method throws the given exception if the result is false.
 
 ```php
 wrapper()->throwIfNotDone();
@@ -310,26 +334,10 @@ wrapper()->throwIfNotDone();
 
 #### *throwUnless()*
 
-The `throwUnless` method throws the given exception if the given value evaluates to false.
+The `throwUnless` method throws the given exception unless the result is true.
 
 ```php
-wrapper()->throwUnless(false);
-```
-
-```php
-wrapper()->throwUnless(fn(mixed $result): mixed => false);
-```
-
-#### *throwWhen()*
-
-The `throwWhen` method throws the given exception if the given value evaluates to true.
-
-```php
-wrapper()->throwWhen(true);
-```
-
-```php
-wrapper()->throwWhen(fn(mixed $result): mixed => true);
+wrapper()->throwUnless();
 ```
 
 #### *transaction()*

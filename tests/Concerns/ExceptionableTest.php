@@ -2,9 +2,10 @@
 
 namespace R3bzya\ActionWrapper\Tests\Concerns;
 
-use PHPUnit\Framework\TestCase;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;
+use R3bzya\ActionWrapper\Tests\TestCase;
 use RuntimeException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class ExceptionableTest extends TestCase
@@ -12,18 +13,20 @@ class ExceptionableTest extends TestCase
     public function testThrowWhen(): void
     {
         $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Error!');
 
         wrapper()
-            ->throwWhen(true)
-            ->execute(false);
+            ->throwIf(RuntimeException::class, 'Error!')
+            ->execute(true);
     }
 
     public function testThrowUnless(): void
     {
         $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Error!');
 
         wrapper()
-            ->throwUnless(false)
+            ->throwUnless('Error!')
             ->execute(false);
     }
 
@@ -78,5 +81,23 @@ class ExceptionableTest extends TestCase
                 ->falseInsteadOfThrowable()
                 ->execute(fn() => throw new RuntimeException),
         );
+    }
+
+    public function testAbortIf(): void
+    {
+        $this->expectException(HttpException::class);
+
+        wrapper()
+            ->abortIf(500)
+            ->execute(true);
+    }
+
+    public function testAbortUnless(): void
+    {
+        $this->expectException(HttpException::class);
+
+        wrapper()
+            ->abortUnless(500)
+            ->execute(false);
     }
 }

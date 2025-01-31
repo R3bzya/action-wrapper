@@ -3,9 +3,11 @@
 namespace R3bzya\ActionWrapper\Concerns;
 
 use Closure;
+use Illuminate\Contracts\Support\Responsable;
 use R3bzya\ActionWrapper\ActionWrapper;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;
 use RuntimeException;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 trait Exceptionable
@@ -41,19 +43,25 @@ trait Exceptionable
     }
 
     /**
-     * Throw an exception if the given value is truthy.
+     * Throw the given exception if the result is true.
      */
-    public function throwWhen(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static
+    public function throwIf(
+        Throwable|string $exception = new RuntimeException,
+        ...$parameters,
+    ): ActionWrapper|static
     {
-        return $this->when($value, fn() => throw $throwable);
+        return $this->after(fn(mixed $result) => throw_if($result, $exception, ...$parameters));
     }
 
     /**
-     * Throw an exception if the given value is falsy.
+     * Throw the given exception unless the result is true.
      */
-    public function throwUnless(mixed $value, Throwable $throwable = new RuntimeException): ActionWrapper|static
+    public function throwUnless(
+        Throwable|string $exception = new RuntimeException,
+        ...$parameters,
+    ): ActionWrapper|static
     {
-        return $this->unless($value, fn() => throw $throwable);
+        return $this->after(fn(mixed $result) => throw_unless($result, $exception, ...$parameters));
     }
 
     /**
@@ -61,6 +69,30 @@ trait Exceptionable
      */
     public function throwIfNotDone(Throwable $throwable = new NotDoneException): ActionWrapper|static
     {
-        return $this->throwWhen(fn(mixed $result) => $result === false, $throwable);
+        return $this->when(fn(mixed $result) => $result === false, fn() => throw $throwable);
+    }
+
+    /**
+     * Throw an HttpException with the given data if the result is true.
+     */
+    public function abortIf(
+        Response|Responsable|int $code,
+        string $message = '',
+        array $headers = [],
+    ): ActionWrapper|static
+    {
+        return $this->after(fn(mixed $result) => abort_if($result, $code, $message, $headers));
+    }
+
+    /**
+     * Throw an HttpException with the given data unless the result is true.
+     */
+    public function abortUnless(
+        Response|Responsable|int $code,
+        string $message = '',
+        array $headers = [],
+    ): ActionWrapper|static
+    {
+        return $this->after(fn(mixed $result) => abort_unless($result, $code, $message, $headers));
     }
 }
