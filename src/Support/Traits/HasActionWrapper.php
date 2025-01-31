@@ -11,6 +11,7 @@ use R3bzya\ActionWrapper\Concerns\Loggable;
 use R3bzya\ActionWrapper\Concerns\Retryable;
 use R3bzya\ActionWrapper\Concerns\Tappable;
 use R3bzya\ActionWrapper\Concerns\Transactional;
+use R3bzya\ActionWrapper\Concerns\Wrapable;
 use R3bzya\ActionWrapper\Support\Traits\Simples\HasActionWrapper as HasSimpleActionWrapper;
 
 trait HasActionWrapper
@@ -24,5 +25,6 @@ trait HasActionWrapper
         Loggable,
         Retryable,
         Tappable,
-        Transactional;
+        Transactional,
+        Wrapable;
 }

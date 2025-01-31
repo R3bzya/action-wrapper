@@ -388,6 +388,14 @@ wrapper()->when(fn(mixed $result): mixed => true, fn(): mixed => true);
 wrapper()->when(true, fn(mixed $result): mixed => $result);
 ```
 
+#### *wrap()*
+
+The `wrap` method wraps the result in the given class.
+
+```php
+wrapper()->wrap();
+```
+
 ## Artisan commands
 
 The `make:action` command makes an action class.
