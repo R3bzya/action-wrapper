@@ -52,7 +52,7 @@ interface Payload extends Arrayable
     /**
      * Get the action exception to the payload.
      */
-    public function getException(): Throwable;
+    public function getException(Throwable|null $default = null): Throwable|null;
 
     /**
      * Determine if the payload has an action exception.

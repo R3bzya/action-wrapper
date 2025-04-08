@@ -82,10 +82,7 @@ class PayloadTest extends TestCase
 
     public function testExceptionIsNotSet(): void
     {
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('The exception does not exist in the payload.');
-
-        (new Payload)->getException();
+        $this->assertNull((new Payload)->getException());
     }
 
     /**

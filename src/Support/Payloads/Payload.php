@@ -118,16 +118,9 @@ class Payload implements PayloadContract
         return $this->put('exception', $exception);
     }
 
-    /**
-     * @throws RuntimeException
-     */
-    public function getException(): Throwable
+    public function getException(Throwable|null $default = null): Throwable|null
     {
-        if (! $this->hasException()) {
-            throw new RuntimeException('The exception does not exist in the payload.');
-        }
-
-        return $this->get('exception');
+        return $this->get('exception', $default);
     }
 
     public function hasException(): bool
@@ -216,6 +209,9 @@ class Payload implements PayloadContract
         return $this->hasResult() || $this->hasException();
     }
 
+    /**
+     * @throws RuntimeException
+     */
     public function validated(): static
     {
         if (! $this->validate()) {
