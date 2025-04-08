@@ -14,7 +14,7 @@ return [
         // The default return type for actions without a model
         'return_type' => 'void',
 
-        // Make an action dto as a readonly class (or not) when an action creates a DTO
+        // Make an action dto as a readonly class (or not) when creates a DTO
         'readonly_dto' => true,
 
         'dto_variable_placeholder' => null,

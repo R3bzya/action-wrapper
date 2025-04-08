@@ -128,6 +128,9 @@ class Logger implements LoggerInterface
         return LogFacade::build($config);
     }
 
+    /**
+     * Prepares and returns a complete path for a log file based on the given path and file name.
+     */
     protected function preparePath(string $path, string|null $file): string
     {
         // If the file name is null and the path ends with ".log",
@@ -151,15 +154,11 @@ class Logger implements LoggerInterface
 
     protected function replacePlaceholders(array $data): array
     {
-        $result = [];
-
-        foreach ($data as $key => $datum) {
-            $result[$key] = is_array($datum)
+        return array_map(function (array|string $datum) {
+            return is_array($datum)
                 ? $this->replacePlaceholders($datum)
                 : $this->replacePlaceholdersInString($datum);
-        }
-
-        return $result;
+        }, $data);
     }
 
     protected function replacePlaceholdersInString(string $value): string

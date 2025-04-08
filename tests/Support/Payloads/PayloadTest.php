@@ -140,15 +140,10 @@ class PayloadTest extends TestCase
     {
         $payload = new Payload;
         $payload->setResult(true);
-        $payload->complete($completedAt = Carbon::now());
+        $payload->complete(Carbon::now());
 
         $this->assertTrue($payload->isCompleted());
         $this->assertNotNull($payload->getCompletedAt());
-
-        $payload->complete($notCompletedAt = Carbon::now()->addDays());
-
-        $this->assertTrue($payload->getCompletedAt()->eq($completedAt));
-        $this->assertFalse($payload->getCompletedAt()->eq($notCompletedAt));
     }
 
     public function testIncomplete(): void

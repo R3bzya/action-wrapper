@@ -162,10 +162,6 @@ class Payload implements PayloadContract
 
     public function complete(Carbon $completedAt = null): static
     {
-        if ($this->isCompleted()) {
-            return $this;
-        }
-
         return $this->put('completed_at', $completedAt ?: Carbon::now());
     }
 
