@@ -149,6 +149,14 @@ The `abortIf` method throws an HttpException with the given data if the result i
 wrapper()->abortIf();
 ```
 
+#### *abortInternalServerErrorUnless()*
+
+The `abortInternalServerErrorUnless` method throws an HttpException with the given data unless the result is true.
+
+```php
+wrapper()->abortInternalServerErrorUnless();
+```
+
 #### *abortUnless()*
 
 The `abortUnless` method throws an HttpException with the given data unless the result is true.

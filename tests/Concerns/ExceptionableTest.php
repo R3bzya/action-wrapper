@@ -33,6 +33,7 @@ class ExceptionableTest extends TestCase
     public function testThrowIfNotDone(): void
     {
         $this->expectException(NotDoneException::class);
+        $this->expectExceptionMessage('Action not done.');
 
         wrapper()
             ->throwIfNotDone(new NotDoneException)
@@ -110,6 +111,22 @@ class ExceptionableTest extends TestCase
 
         wrapper()
             ->abortUnless(500)
+            ->execute(false);
+    }
+
+    public function testAbortInternalServerErrorUnless(): void
+    {
+        $result = wrapper()
+            ->abortInternalServerErrorUnless()
+            ->execute(true);
+
+        $this->assertTrue($result);
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage('Something went wrong.');
+
+        wrapper()
+            ->abortInternalServerErrorUnless()
             ->execute(false);
     }
 }

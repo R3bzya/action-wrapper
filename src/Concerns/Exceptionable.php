@@ -4,6 +4,7 @@ namespace R3bzya\ActionWrapper\Concerns;
 
 use Closure;
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Support\Facades\Lang;
 use R3bzya\ActionWrapper\ActionWrapper;
 use R3bzya\ActionWrapper\Exceptions\NotDoneException;
 use RuntimeException;
@@ -106,5 +107,13 @@ trait Exceptionable
         };
 
         return $this->after($abortHandler);
+    }
+
+    /**
+     * Throw an HttpException with the given data unless the result is true.
+     */
+    public function abortInternalServerErrorUnless(string $message = 'Something went wrong.', array $headers = []): ActionWrapper|static
+    {
+        return $this->abortUnless(Response::HTTP_INTERNAL_SERVER_ERROR, Lang::get($message), $headers);
     }
 }
