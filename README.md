@@ -11,6 +11,14 @@ Via Composer:
 ```shell
 composer require r3bzya/action-wrapper
 ```
+# Publishing
+
+The commands below allow you to publish specific components of the package to your Laravel project:
+
+```shell
+php artisan vendor:publish --tag=action-wrapper-config
+php artisan vendor:publish --tag=action-wrapper-stubs
+```
 
 ## Available classes
 
