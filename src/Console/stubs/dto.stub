@@ -2,12 +2,18 @@
 
 namespace {{ namespace }};
 
+{{ uses }}
+
 {{ classReadonly }} {{ class }}
 {
-    public function __construct() {}
+    public function __construct(
+        {{ constructAttributes }}
+    ) {}
 
     public function all(): array
     {
-        // TODO: Implement all() method.
+        return [
+            {{ allAttributes }}
+        ];
     }
 }

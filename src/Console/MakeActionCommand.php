@@ -38,12 +38,12 @@ class MakeActionCommand extends GeneratorCommand
             $this->input->setOption('model', true);
         }
 
-        if ($this->option('dto') !== false) {
-            $this->createDto();
-        }
-
         if ($this->option('model') !== false) {
             $this->createModel();
+        }
+
+        if ($this->option('dto') !== false) {
+            $this->createDto();
         }
 
         return static::SUCCESS;
@@ -204,6 +204,7 @@ class MakeActionCommand extends GeneratorCommand
     {
         $this->call('make:dto', [
             'name' => $this->getNamespacedDto(),
+            '--model' => $this->getNamespacedModel(),
             '--readonly' => config('action-wrapper.action.readonly_dto', false),
         ]);
     }
@@ -269,8 +270,12 @@ class MakeActionCommand extends GeneratorCommand
 
     protected function createModel(): void
     {
+        if ($this->alreadyExists($namespacedModel = $this->getNamespacedModel())) {
+            return;
+        }
+
         $this->call('make:model', [
-            'name' => $this->getNamespacedModel(),
+            'name' => $namespacedModel,
             '--migration' => true,
         ]);
     }

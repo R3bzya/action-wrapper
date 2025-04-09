@@ -8,6 +8,7 @@ class MakeDtoCommandTest extends GeneratorTestCase
 {
     protected array $files = [
         'app/Dto/Actions/*',
+        'app/Models/*',
     ];
 
     public function testCreateDto(): void
@@ -40,6 +41,25 @@ class MakeDtoCommandTest extends GeneratorTestCase
             'namespace App\Dto\Actions;',
             'readonly class Foo',
             'public function all(): array',
+        ], 'app/Dto/Actions/Foo.php');
+
+        $this->assertFilenameExists('app/Dto/Actions/Foo.php');
+    }
+
+    public function testCreateWithModelDto(): void
+    {
+        $this->artisan('make:model Foo');
+
+        $this->artisan(MakeDtoCommand::class, [
+            'name' => 'Foo',
+            '--model' => 'Foo',
+        ])->assertSuccessful();
+
+        $this->assertFileContains([
+            'namespace App\Dto\Actions;',
+            'class Foo',
+            'public int $id',
+            '\'id\' => $this->id',
         ], 'app/Dto/Actions/Foo.php');
 
         $this->assertFilenameExists('app/Dto/Actions/Foo.php');

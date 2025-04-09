@@ -22,7 +22,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "R3bzya\\ActionWrapper\\Tests\\": "tests/"
+            "R3bzya\\ActionWrapper\\Tests\\": "tests/",
+            "App\\": "vendor/orchestra/testbench-core/laravel/app/"
         }
     },
     "scripts": {

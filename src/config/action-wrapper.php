@@ -22,6 +22,8 @@ return [
 
     'dto' => [
         'path' => 'Dto\Actions',
+
+        'casts' => [],
     ],
 
     'logging' => [
