@@ -2,7 +2,6 @@
 
 namespace R3bzya\ActionWrapper\Console;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use R3bzya\ActionWrapper\Console\Enums\ActionEnum;
 use R3bzya\ActionWrapper\Console\Guessers\ActionGuesser;
