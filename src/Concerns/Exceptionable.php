@@ -81,7 +81,13 @@ trait Exceptionable
         array $headers = [],
     ): ActionWrapper|static
     {
-        return $this->after(fn(mixed $result) => abort_if($result, $code, $message, $headers));
+        $abortHandler = function (mixed $result) use ($code, $message, $headers) {
+            abort_if($result, $code, $message, $headers);
+
+            return $result;
+        };
+
+        return $this->after($abortHandler);
     }
 
     /**
@@ -93,6 +99,12 @@ trait Exceptionable
         array $headers = [],
     ): ActionWrapper|static
     {
-        return $this->after(fn(mixed $result) => abort_unless($result, $code, $message, $headers));
+        $abortHandler = function (mixed $result) use ($code, $message, $headers) {
+            abort_unless($result, $code, $message, $headers);
+
+            return $result;
+        };
+
+        return $this->after($abortHandler);
     }
 }

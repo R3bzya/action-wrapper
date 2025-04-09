@@ -85,6 +85,12 @@ class ExceptionableTest extends TestCase
 
     public function testAbortIf(): void
     {
+        $result = wrapper()
+            ->abortIf(500)
+            ->execute(false);
+
+        $this->assertFalse($result);
+
         $this->expectException(HttpException::class);
 
         wrapper()
@@ -94,6 +100,12 @@ class ExceptionableTest extends TestCase
 
     public function testAbortUnless(): void
     {
+        $result = wrapper()
+            ->abortUnless(500)
+            ->execute(true);
+
+        $this->assertTrue($result);
+
         $this->expectException(HttpException::class);
 
         wrapper()
